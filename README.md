@@ -9,8 +9,11 @@ O Fluxograma USF foi desenvolvido no contexto do projeto PET-Saúde/Informação
 A proposta busca:
 
 Estruturar fluxos assistenciais padronizados
+
 Apoiar a tomada de decisão clínica
+
 Melhorar a comunicação entre profissionais
+
 Reduzir inconsistências nos processos de atendimento
 
 Este projeto está alinhado às diretrizes da saúde digital no SUS e à necessidade de qualificação da gestão da informação em saúde
@@ -18,10 +21,15 @@ Este projeto está alinhado às diretrizes da saúde digital no SUS e à necessi
 .
 
 🎯 Objetivos
+
 📌 Mapear e representar fluxos assistenciais da APS
+
 📌 Padronizar processos de atendimento nas USF
+
 📌 Apoiar a implementação de protocolos clínicos
+
 📌 Facilitar a visualização de fluxos por profissionais de saúde
+
 📌 Contribuir para a transformação digital no SUS
 
 🏥 Contexto de Aplicação
