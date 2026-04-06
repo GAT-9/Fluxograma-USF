@@ -15,10 +15,15 @@ import {
   UserCheck,
   Stethoscope,
   FileText,
-  BedDouble,
   ShieldAlert,
   Building2,
   X,
+  Activity,
+  AlertTriangle,
+  Bug,
+  Hand,
+  Cat,
+  Shield,
 } from "lucide-react";
 import { faqCategories, type FaqCategory, type FaqItem } from "@/lib/faqData";
 
@@ -30,8 +35,13 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   UserCheck,
   Stethoscope,
   FileText,
-  BedDouble,
   ShieldAlert,
+  Activity,
+  AlertTriangle,
+  Bug,
+  Hand,
+  Cat,
+  Shield,
 };
 
 // ── Category Tab ──────────────────────────────────────────────────────────────
@@ -148,7 +158,7 @@ function FaqCard({
               {item.note && (
                 <div className="mt-4 flex gap-2.5 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
                   <span className="text-amber-600 text-xs font-bold uppercase tracking-wide shrink-0 mt-0.5">
-                    Note
+                    Atenção
                   </span>
                   <p className="text-amber-800 text-xs leading-relaxed">{item.note}</p>
                 </div>
@@ -218,7 +228,7 @@ export default function Home() {
                 Portal USF Vereador Durval Samuel de Souza
               </span>
               <span className="text-slate-400 text-xs">
-                Mapeamento de Processos Assistenciais
+                Fluxogramas Assistenciais — PET
               </span>
             </div>
           </div>
@@ -233,7 +243,7 @@ export default function Home() {
       <section className="relative overflow-hidden" style={{ height: "280px" }}>
         <img
           src={HERO_IMAGE}
-          alt="Hospital corridor"
+          alt="Corredor da unidade de saúde"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div
@@ -256,16 +266,13 @@ export default function Home() {
               className="text-white text-3xl md:text-4xl font-bold leading-tight mb-3"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Protocolos Operacionais
+              Fluxogramas de
               <br />
-              <span className="text-teal-300">
-                de Admissão e Fluxo Assistencial
-              </span>
+              <span className="text-teal-300">Vigilância em Saúde</span>
             </h1>
             <p className="text-slate-200 text-sm max-w-md leading-relaxed">
-              Instruções passo a passo para a equipe da unidade, padronizando o
-              fluxo de trabalho desde a pré-admissão até a transferência para
-              unidade de internação.
+              Protocolos passo a passo para a equipe da unidade — desde a recepção até a
+              notificação e acompanhamento dos casos.
             </p>
           </motion.div>
         </div>
@@ -279,9 +286,9 @@ export default function Home() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="Busque por procedimentos, departamentos, ou palavras-chave…"
+              placeholder="Busque por procedimentos, departamentos ou palavras-chave…"
               value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-9 py-2.5 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition"
               style={{ fontFamily: "'Lato', sans-serif" }}
             />
@@ -296,7 +303,7 @@ export default function Home() {
           </div>
           {/* Category tabs */}
           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-            {faqCategories.map(cat => (
+            {faqCategories.map((cat) => (
               <CategoryTab
                 key={cat.id}
                 category={cat}
@@ -384,7 +391,7 @@ export default function Home() {
             <div className="grid gap-4 md:grid-cols-2">
               <AnimatePresence mode="wait">
                 {filteredItems.length > 0 ? (
-                  filteredItems.map(item => (
+                  filteredItems.map((item) => (
                     <FaqCard
                       key={item.id}
                       item={item}
@@ -401,7 +408,7 @@ export default function Home() {
                   >
                     <Search className="w-10 h-10 mx-auto mb-3 opacity-40" />
                     <p className="text-sm">
-                      Nenhum resultado encontrado nesta categoria..
+                      Nenhum resultado encontrado nesta categoria.
                     </p>
                   </motion.div>
                 )}
@@ -426,7 +433,7 @@ export default function Home() {
             </span>
           </div>
           <p className="text-slate-400 text-xs text-center">
-            Uso interno. Atualizações via equipe PET Gat-9.
+            Uso interno. Atualizações via equipe PET.
           </p>
         </div>
       </footer>
