@@ -62,3 +62,21 @@ Este projeto está alinhado às diretrizes da saúde digital no SUS e à necessi
 - 📤 Compartilhamento de fluxos entre equipes<br>
 - 📚 Apoio à educação permanente em saúde<br>
 
+## 🛠️ Como iniciar o projeto
+1. Abra o terminal na pasta do projeto:
+   
+2. Instale as dependências:
+   - `pnpm install`
+3. Execute em modo de desenvolvimento:
+   - `pnpm dev`
+4. Abra o navegador em:
+   - `http://localhost:5173`
+
+### Executar em produção
+1. Faça o build:
+   - `pnpm build`
+2. Inicie a aplicação:
+   - `pnpm start`
+
+> Se `pnpm` não estiver instalado, instale com `npm install -g pnpm` ou use `npx pnpm install`.
+
