@@ -1,7 +1,7 @@
 /*
- * DESIGN PHILOSOPHY: Soft Clinical
- * FAQ data for Portal USF Vereador Durval Samuel de Souza — Patient Admission activities.
- * Each category has a color accent and a set of FAQ items with step-by-step answers.
+ * FAQ data para Portal USF Vereador Durval Samuel de Souza
+ * Fluxogramas Assistenciais de Vigilância em Saúde — equipe PET
+ * Dados extraídos do documento oficial FLUXOGRAMAS_-_PET.docx
  */
 
 export interface FaqStep {
@@ -22,339 +22,542 @@ export interface FaqCategory {
   id: string;
   label: string;
   description: string;
-  color: string;        // Tailwind border/text color class
-  bgColor: string;      // Tailwind bg color class for badge
-  icon: string;         // Lucide icon name
+  color: string;
+  bgColor: string;
+  icon: string;
   items: FaqItem[];
 }
 
 export const faqCategories: FaqCategory[] = [
+  // ─────────────────────────────────────────────────────────────
+  // TUBERCULOSE
+  // ─────────────────────────────────────────────────────────────
   {
-    id: "pre-admission",
-    label: "Pre-Admission",
-    description: "Procedures and verifications to be completed before the patient arrives at the ward.",
+    id: "tuberculose",
+    label: "Tuberculose",
+    description:
+      "Fluxo de atendimento para casos suspeitos ou confirmados de tuberculose pulmonar, incluindo coleta de escarro, notificação e tratamento.",
+    color: "border-emerald-500",
+    bgColor: "bg-emerald-50 text-emerald-700",
+    icon: "Activity",
+    items: [
+      {
+        id: "tb-01",
+        question: "Como recepcionar um paciente com suspeita de tuberculose (usuário não referenciado)?",
+        department: "Recepção",
+        answer:
+          "Ao chegar à USF relatando tosse persistente (> 3 semanas) ou outros sintomas respiratórios, o usuário deve receber atenção imediata para evitar transmissão.",
+        steps: [
+          { step: 1, instruction: "Usuário chega na unidade, se identifica na recepção e relata sintomas (geralmente tosse persistente > 3 semanas ou outros sintomas respiratórios)." },
+          { step: 2, instruction: "Recepcionista aciona o médico ou enfermeira para saber quem vai fazer o atendimento conforme disponibilidade da agenda." },
+          { step: 3, instruction: "Entregar máscara cirúrgica ao paciente imediatamente (IMPORTANTE!)." },
+        ],
+        note: "No deslocamento do paciente pela unidade, ele deverá usar máscara cirúrgica durante todo o tempo. Adotar precaução para aerossóis: máscara PFF2/N95, higienização das mãos antes e após o contato com o paciente.",
+      },
+      {
+        id: "tb-02",
+        question: "Como recepcionar um paciente referenciado por outro serviço, já com amostra de escarro?",
+        department: "Recepção / Enfermagem",
+        answer:
+          "Usuário que já vem com solicitação e amostra de outro serviço segue um fluxo simplificado focado no recebimento correto do material.",
+        steps: [
+          { step: 1, instruction: "Usuário chega, se identifica na recepção e informa que veio trazer a amostra de escarro, apresentando a solicitação de análise." },
+          { step: 2, instruction: "Entregar máscara cirúrgica ao paciente (IMPORTANTE!)." },
+          { step: 3, instruction: "Encaminhar o paciente para a enfermeira." },
+          { step: 4, instruction: "Enfermeira recebe a amostra e armazena na caixa térmica específica." },
+          { step: 5, instruction: "Conferir a quantidade de amostra, a identificação do paciente e os dados antes de armazenar." },
+        ],
+        note: "É EXPRESSAMENTE PROIBIDO armazenar amostras nas geladeiras da unidade. Utilizar exclusivamente a caixa térmica específica para esse fim.",
+      },
+      {
+        id: "tb-03",
+        question: "Como realizar a triagem e classificação de risco para suspeita de TB?",
+        department: "Técnica de Enfermagem / Triagem",
+        answer:
+          "A triagem identifica sinais de gravidade e garante o encaminhamento adequado, com registro dos dados vitais e reforço das precauções respiratórias.",
+        steps: [
+          { step: 1, instruction: "Técnica de enfermagem realiza triagem e escuta inicial, identificando suspeita de tuberculose." },
+          { step: 2, instruction: "Registrar dados vitais no prontuário." },
+          { step: 3, instruction: "Reforçar o uso correto da máscara cirúrgica (precaução respiratória)." },
+          { step: 4, instruction: "Avaliar se há sinais de gravidade." },
+          { step: 5, instruction: "Com sinais de gravidade: encaminhar imediatamente para médico ou enfermeira com agenda disponível." },
+          { step: 6, instruction: "Sem sinais de gravidade: orientar aguardar atendimento na sala de espera com máscara." },
+        ],
+      },
+      {
+        id: "tb-04",
+        question: "Qual é a conduta na consulta clínica inicial para suspeita de TB?",
+        department: "Médico / Enfermeira",
+        answer:
+          "O médico ou enfermeira realiza anamnese detalhada, define a suspeita clínica e solicita os exames complementares necessários para o diagnóstico.",
+        steps: [
+          { step: 1, instruction: "Realizar anamnese detalhada e exame físico completo." },
+          { step: 2, instruction: "Definir se há suspeita de TB ativa." },
+          { step: 3, instruction: "Solicitar baciloscopia de escarro (2 amostras)." },
+          { step: 4, instruction: "Solicitar Teste Rápido Molecular para TB (TRM-TB) — SUS." },
+          { step: 5, instruction: "Solicitar raio-X de tórax (encaminhar para o serviço via cadastro no IDS)." },
+        ],
+        note: "Para solicitação de exames, é necessário: cópia do cartão do SUS (CNS) e/ou CPF, identificação correta da amostra (nome completo sem abreviaturas, data de nascimento ou CPF e data da coleta). A 1ª amostra é recolhida pela VIEP para envio ao HEOM. A 2ª amostra deve ser cadastrada pelo profissional da APS no IDS, gerando a chave de acesso com o CPF do paciente.",
+      },
+      {
+        id: "tb-05",
+        question: "Como orientar e realizar a coleta de escarro corretamente?",
+        department: "Coleta",
+        answer:
+          "A qualidade da coleta de escarro é determinante para o resultado do exame. Seguir rigorosamente as normas de identificação, volume e armazenamento.",
+        steps: [
+          { step: 1, instruction: "A coleta deve ocorrer em área aberta ou ventilada (a unidade não dispõe de sala específica). Geralmente solicita-se que o paciente traga sua coleta no dia seguinte." },
+          { step: 2, instruction: "Orientar o paciente sobre como coletar corretamente o escarro." },
+          { step: 3, instruction: "Volume ideal da amostra: 5–10 ml." },
+          { step: 4, instruction: "1ª amostra: preferencialmente ao despertar (melhor qualidade, pois provém das secreções acumuladas durante a noite). 2ª amostra: mesmo horário, no dia seguinte." },
+          { step: 5, instruction: "Usar potes plásticos descartáveis, de boca larga, transparente, com tampa de rosca, capacidade de 35–50 ml." },
+          { step: 6, instruction: "Identificar no CORPO do pote (nunca na tampa): nome completo do paciente e data da coleta — usar esparadrapo, fita crepe ou caneta de tinta permanente." },
+          { step: 7, instruction: "Acondicionar e enviar as amostras ao laboratório de referência. As amostras são recolhidas pela VIEP." },
+        ],
+        note: "Conservar sob refrigeração por no máximo 7 dias após o recebimento. Não conservar em temperatura ambiente por mais de 24 horas. PROIBIDO armazenar nas geladeiras da unidade.",
+      },
+      {
+        id: "tb-06",
+        question: "Qual é a conduta após o resultado dos exames e como fazer o acompanhamento do caso de TB?",
+        department: "Médico / Equipe de Saúde",
+        answer:
+          "A conduta pós-resultado deve ser ágil. Casos confirmados iniciam tratamento imediatamente na USF, com notificação obrigatória e acompanhamento mensal.",
+        steps: [
+          { step: 1, instruction: "TB CONFIRMADA: notificar o caso no SINAN." },
+          { step: 2, instruction: "Iniciar o tratamento na própria USF (medicamentos dispensados pela farmácia/unidade, vindos da VIEP)." },
+          { step: 3, instruction: "Acompanhamento MENSAL pela equipe de saúde da família." },
+          { step: 4, instruction: "Busca ativa: orientações sobre adesão, rastreamento de contactantes domiciliares e medidas de prevenção." },
+          { step: 5, instruction: "TB NÃO CONFIRMADA: realizar reavaliação clínica ou encaminhar para outros diagnósticos diferenciais." },
+          { step: 6, instruction: "Se necessário exame de imagem ou cultura fora da unidade: encaminhar para serviço de referência." },
+          { step: 7, instruction: "Casos graves ou com complicações: encaminhar para hospital." },
+        ],
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // COVID-19
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: "covid19",
+    label: "COVID-19",
+    description:
+      "Protocolos de acolhimento, triagem, testagem, isolamento domiciliar e monitoramento para casos suspeitos e confirmados de COVID-19.",
     color: "border-blue-500",
     bgColor: "bg-blue-50 text-blue-700",
-    icon: "ClipboardList",
+    icon: "AlertTriangle",
     items: [
       {
-        id: "pa-01",
-        question: "How do I verify a patient's insurance coverage before admission?",
-        department: "Admissions Office",
-        answer: "Insurance verification must be completed at least 24 hours before a scheduled admission. Access the patient's file in the HIS (Hospital Information System) and follow the steps below.",
+        id: "cv-01",
+        question: "Como recepcionar e acolher um paciente com sintomas de COVID-19?",
+        department: "Recepção",
+        answer:
+          "O usuário que chega com sintomas gripais deve ser identificado e isolado imediatamente para evitar transmissão na unidade.",
         steps: [
-          { step: 1, instruction: "Log in to the HIS portal and navigate to Patient Management > Pre-Admission." },
-          { step: 2, instruction: "Search for the patient by full name or medical record number (MRN)." },
-          { step: 3, instruction: "Open the patient's profile and select the 'Insurance' tab." },
-          { step: 4, instruction: "Click 'Verify Coverage' to initiate an automated eligibility check with the insurer." },
-          { step: 5, instruction: "If the automated check fails, call the insurer directly using the number listed on the patient's insurance card." },
-          { step: 6, instruction: "Document the verification result and the representative's name in the 'Notes' field." },
-          { step: 7, instruction: "Set the coverage status to 'Verified' or 'Pending' and save the record." },
+          { step: 1, instruction: "Usuário chega na unidade, se identifica na recepção e relata sintomas gripais (febre, tosse, dor de garganta, coriza, dispneia, perda de olfato/paladar, cefaleia, mialgia, fadiga)." },
+          { step: 2, instruction: "Recepcionista aciona o médico ou enfermeira para definir quem realizará o atendimento conforme disponibilidade da agenda." },
+          { step: 3, instruction: "Entregar máscara cirúrgica ao paciente e higienizar as mãos com álcool 70% (IMPORTANTE!)." },
+          { step: 4, instruction: "Caso sintomático respiratório: orientar imediatamente para distanciamento e uso de máscara." },
+          { step: 5, instruction: "Encaminhar para a área de isolamento respiratório da unidade." },
         ],
-        note: "If coverage cannot be confirmed within 4 hours of the scheduled admission, escalate to the Billing Supervisor.",
+        note: "Organizar fluxo separado para sintomáticos respiratórios. Garantir ventilação natural e distanciamento físico. Usar EPI completo (máscara N95, avental, luvas, protetor facial). Realizar limpeza e desinfecção de superfícies após cada atendimento.",
       },
       {
-        id: "pa-02",
-        question: "What documents must be collected during pre-admission registration?",
-        department: "Reception",
-        answer: "A complete pre-admission package ensures a smooth check-in process and avoids delays on the day of admission. The following documents are mandatory.",
+        id: "cv-02",
+        question: "Como realizar a triagem e classificação de gravidade para COVID-19?",
+        department: "Técnica de Enfermagem / Triagem",
+        answer:
+          "A triagem avalia os sinais vitais e a gravidade do quadro, definindo se o paciente será atendido na USF ou encaminhado para unidade de referência.",
         steps: [
-          { step: 1, instruction: "Government-issued photo ID (national ID, passport, or driver's license)." },
-          { step: 2, instruction: "Original insurance card and a photocopy for the file." },
-          { step: 3, instruction: "Completed Patient Admission Form (PAF-01), signed by the patient or legal guardian." },
-          { step: 4, instruction: "Physician's admission order, signed and dated within the last 72 hours." },
-          { step: 5, instruction: "Consent for Treatment form (CT-02), signed and witnessed." },
-          { step: 6, instruction: "Advance Directive or Healthcare Proxy form, if applicable." },
+          { step: 1, instruction: "Técnica de enfermagem faz triagem e escuta inicial, identificando suspeita de COVID-19." },
+          { step: 2, instruction: "Registrar dados vitais no prontuário: temperatura, saturação (SpO₂), pressão arterial, FC, FR." },
+          { step: 3, instruction: "Avaliar gravidade: dispneia, saturação < 95%, confusão mental, cianose, taquipneia." },
+          { step: 4, instruction: "Reforçar o uso correto da máscara cirúrgica (precaução respiratória)." },
+          { step: 5, instruction: "Com sinais de gravidade: encaminhar imediatamente para médico/enfermeira ou referenciar para UPA/HRSAJ." },
+          { step: 6, instruction: "Sem sinais de gravidade: aguardar atendimento na sala de espera." },
+          { step: 7, instruction: "Registrar dados no prontuário e notificar suspeita no sistema IDS." },
         ],
-        note: "Scan all documents and upload them to the patient's electronic record before the end of the shift.",
       },
       {
-        id: "pa-03",
-        question: "How do I schedule a pre-admission assessment for surgical patients?",
-        department: "Pre-Admission Testing (PAT) Unit",
-        answer: "Surgical patients require a pre-admission assessment to evaluate fitness for surgery and anesthesia. This must be scheduled at least 5 business days before the procedure.",
+        id: "cv-03",
+        question: "Qual é a conduta médica e como classificar a gravidade do caso de COVID-19?",
+        department: "Médico",
+        answer:
+          "Na consulta clínica, o médico classifica o caso em leve, moderado ou grave e define a conduta: tratamento domiciliar ou encaminhamento hospitalar.",
         steps: [
-          { step: 1, instruction: "Receive the surgical booking confirmation from the Operating Room Coordinator." },
-          { step: 2, instruction: "Contact the patient by phone to schedule the PAT appointment, offering morning slots (08:00–12:00) when possible." },
-          { step: 3, instruction: "Enter the PAT appointment in the HIS scheduling module under 'Pre-Admission Testing'." },
-          { step: 4, instruction: "Send the patient a confirmation letter via email or post, including the list of required fasting instructions and medications to bring." },
-          { step: 5, instruction: "Flag the surgical booking as 'PAT Scheduled' in the OR schedule." },
+          { step: 1, instruction: "Realizar anamnese e exame físico direcionados." },
+          { step: 2, instruction: "Classificar o caso conforme gravidade: leve, moderado ou grave." },
+          { step: 3, instruction: "Solicitar testagem (RT-PCR ou teste rápido de antígeno) conforme protocolo no CENTROSAJ." },
+          { step: 4, instruction: "CASO LEVE: tratar sintomas (antitérmicos, hidratação, repouso); orientar isolamento domiciliar por 10 dias a partir do início dos sintomas; avaliar necessidade de atestado médico; notificar no sistema oficial." },
+          { step: 5, instruction: "CASO MODERADO A GRAVE: encaminhar para unidade de referência hospitalar com relatório de encaminhamento." },
+        ],
+      },
+      {
+        id: "cv-04",
+        question: "Como realizar a testagem e coleta de swab para COVID-19?",
+        department: "Técnica de Enfermagem / Enfermeira",
+        answer:
+          "A coleta de swab deve ser feita em sala específica com EPI completo, com identificação correta da amostra e envio adequado ao laboratório.",
+        steps: [
+          { step: 1, instruction: "Realizar coleta em sala específica, com privacidade e biossegurança." },
+          { step: 2, instruction: "Utilizar EPI completo para a coleta de swab nasal/orofaríngeo." },
+          { step: 3, instruction: "Identificar e armazenar a amostra corretamente." },
+          { step: 4, instruction: "Enviar para laboratório de referência (ou VIEP)." },
+          { step: 5, instruction: "Registrar no sistema e informar o paciente sobre o tempo de resultado e meios de recebimento (através da ACS)." },
+        ],
+      },
+      {
+        id: "cv-05",
+        question: "Como orientar o isolamento domiciliar e monitorar o paciente com COVID-19?",
+        department: "Enfermeira / Médico / ACS",
+        answer:
+          "O telemonitoramento ativo é essencial para casos leves. As orientações devem ser reforçadas por qualquer profissional da equipe e o caso encerrado corretamente no sistema.",
+        steps: [
+          { step: 1, instruction: "Reforçar isolamento domiciliar por 10 dias a partir do início dos sintomas." },
+          { step: 2, instruction: "Orientar familiares e contatos próximos sobre monitoramento de sintomas e testagem." },
+          { step: 3, instruction: "Agendar retorno ou telemonitoramento (por telefone ou WhatsApp)." },
+          { step: 4, instruction: "ACS ou enfermeiro realiza contato diário (telemonitoramento) para avaliar evolução clínica." },
+          { step: 5, instruction: "Se piora clínica: agendar reavaliação médica presencial ou encaminhar à UPA." },
+          { step: 6, instruction: "Após alta clínica: registrar encerramento do caso no e-SUS." },
+        ],
+        note: "Critérios para alta: 10 dias após início dos sintomas + 24h sem febre e sem uso de antitérmicos + melhora geral do quadro clínico. REFORÇAR VACINAÇÃO E MEDIDAS PREVENTIVAS (máscara, higiene, distanciamento quando indicado).",
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // ARBOVIROSES
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: "arboviroses",
+    label: "Arboviroses",
+    description:
+      "Fluxos de atendimento para dengue, chikungunya e Zika, incluindo classificação de risco pelo protocolo do MS, condutas por grupo e notificação.",
+    color: "border-orange-500",
+    bgColor: "bg-orange-50 text-orange-700",
+    icon: "Bug",
+    items: [
+      {
+        id: "arb-01",
+        question: "Como recepcionar e realizar a triagem de um paciente com suspeita de arbovirose?",
+        department: "Recepção / Técnica de Enfermagem",
+        answer:
+          "O paciente com sintomas sugestivos de arbovirose deve ser triado com avaliação de sinais de alarme e classificação conforme o protocolo do Ministério da Saúde.",
+        steps: [
+          { step: 1, instruction: "Usuário chega à recepção relatando sintomas sugestivos de arbovirose: febre, dor de cabeça, dor retro-orbitária, mialgia, artralgia, exantema, náuseas, prostração." },
+          { step: 2, instruction: "Recepcionista ou técnica de enfermagem identifica os sintomas, oferece máscara e orienta higienização das mãos." },
+          { step: 3, instruction: "Encaminhar para a triagem de enfermagem." },
+          { step: 4, instruction: "Técnica de enfermagem aferir sinais vitais e avaliar o nível de hidratação." },
+          { step: 5, instruction: "Avaliar presença de sinais de alarme: dor abdominal intensa, sangramentos, vômitos persistentes, irritabilidade, sonolência, hipotensão, dispneia." },
+          { step: 6, instruction: "Registrar informações no prontuário." },
+        ],
+      },
+      {
+        id: "arb-02",
+        question: "Como classificar o risco em casos suspeitos de dengue (Grupos A, B, C e D)?",
+        department: "Técnica de Enfermagem / Médico",
+        answer:
+          "A classificação pelo protocolo do Ministério da Saúde é o passo mais crítico no manejo da dengue. Erros de classificação são a principal causa de óbitos evitáveis.",
+        steps: [
+          { step: 1, instruction: "GRUPO A: sem sinais de alarme e sem comorbidades → encaminhar para consulta médica na própria USF." },
+          { step: 2, instruction: "GRUPO B: sem sinais de alarme, mas com risco (idosos, gestantes, comorbidades) → encaminhar para consulta médica na própria USF." },
+          { step: 3, instruction: "GRUPO C: com sinais de alarme → encaminhar imediatamente para hospital de referência com relatório." },
+          { step: 4, instruction: "GRUPO D: com choque ou sangramento grave → encaminhar imediatamente para hospital de referência com relatório." },
+        ],
+        note: "Sinais de alarme surgem entre o 3º e 7º dia da doença, geralmente com a defervescência da febre. Reforçar este alerta ao paciente no momento da consulta.",
+      },
+      {
+        id: "arb-03",
+        question: "Quais são as condutas médicas conforme o grupo de classificação da dengue?",
+        department: "Médico",
+        answer:
+          "Após anamnese e exame físico, o médico define a conduta baseada na classificação de risco, solicitando exames e prescrevendo tratamento adequado para cada grupo.",
+        steps: [
+          { step: 1, instruction: "Realizar anamnese detalhada e exame físico." },
+          { step: 2, instruction: "Solicitar exames conforme protocolo: hemograma, hematócrito, sorologia, NS1, teste rápido. O encaminhamento para testagem é feito no CTA (funciona de segunda a quinta)." },
+          { step: 3, instruction: "CASOS LEVES (Grupo A): hidratação oral supervisionada; prescrever sintomáticos (paracetamol ou dipirona); orientar sinais de alarme e retorno diário para reavaliação. EVITAR AAS E ANTI-INFLAMATÓRIOS!" },
+          { step: 4, instruction: "CASOS MODERADOS (Grupo B): iniciar hidratação oral intensificada; solicitar hemograma de controle; manter acompanhamento diário pela equipe de enfermagem." },
+          { step: 5, instruction: "CASOS GRAVES (Grupos C e D): encaminhar para UPA ou hospital de referência, comunicando previamente." },
+        ],
+        note: "IMPORTANTE: evitar AAS, ibuprofeno, diclofenaco ou similares em todos os casos de dengue.",
+      },
+      {
+        id: "arb-04",
+        question: "Como orientar o paciente e a família sobre cuidados e sinais de alarme nas arboviroses?",
+        department: "Médico / Enfermeira / ACS",
+        answer:
+          "As orientações ao paciente e à família são fundamentais para a segurança no acompanhamento domiciliar e para a prevenção de novos casos.",
+        steps: [
+          { step: 1, instruction: "Explicar a importância da hidratação (ingerir líquidos claros: água, soro caseiro, sucos, sopas)." },
+          { step: 2, instruction: "Reforçar sinais de alarme que exigem retorno imediato: dor abdominal intensa, vômitos persistentes, tontura, sangramentos, sonolência, irritabilidade, extremidades frias, ausência de diurese." },
+          { step: 3, instruction: "Alertar para NÃO usar AAS, ibuprofeno, diclofenaco ou similares." },
+          { step: 4, instruction: "Orientar sobre prevenção: eliminar criadouros, tampar reservatórios, usar repelente e telas." },
+          { step: 5, instruction: "Em caso de chikungunya: explicar que a dor articular pode persistir e orientar retorno se não houver melhora." },
+          { step: 6, instruction: "Em caso de gestante: manter vigilância e acompanhamento conjunto com o pré-natal." },
+        ],
+      },
+      {
+        id: "arb-05",
+        question: "Como realizar a notificação, acompanhamento e encerramento do caso de arbovirose?",
+        department: "Enfermeira / ACS",
+        answer:
+          "A notificação é obrigatória para todos os casos suspeitos. O acompanhamento domiciliar e o encerramento correto no sistema são responsabilidade da equipe.",
+        steps: [
+          { step: 1, instruction: "Notificar o caso suspeito de arbovirose no SINAN. A notificação e comunicação com a VIEP é feita pela enfermeira." },
+          { step: 2, instruction: "Informar à Vigilância Epidemiológica Municipal." },
+          { step: 3, instruction: "Atualizar o mapa de áreas com casos suspeitos." },
+          { step: 4, instruction: "Realizar visitas domiciliares ou telemonitoramento diário (no período febril e até 7 dias após)." },
+          { step: 5, instruction: "Reavaliar sinais clínicos e verificar hidratação." },
+          { step: 6, instruction: "Reencaminhar o paciente à unidade em caso de agravamento." },
+          { step: 7, instruction: "Confirmar recuperação clínica; encerrar o caso no sistema de notificação; reforçar ações educativas e de prevenção na comunidade." },
         ],
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────────
+  // HANSENÍASE
+  // ─────────────────────────────────────────────────────────────
   {
-    id: "registration",
-    label: "Registration & Check-In",
-    description: "Steps for registering a patient upon arrival and completing the check-in process.",
-    color: "border-teal-500",
-    bgColor: "bg-teal-50 text-teal-700",
-    icon: "UserCheck",
+    id: "hanseniase",
+    label: "Hanseníase",
+    description:
+      "Detecção precoce, exame dermatoneurológico, classificação operacional (PB/MB) e tratamento com Poliquimioterapia (PQT) na atenção primária.",
+    color: "border-pink-500",
+    bgColor: "bg-pink-50 text-pink-700",
+    icon: "Hand",
     items: [
       {
-        id: "reg-01",
-        question: "What is the standard check-in procedure for a scheduled admission?",
-        department: "Reception",
-        answer: "Scheduled admissions should be processed within 15 minutes of the patient's arrival. Follow the steps below to complete the check-in efficiently.",
+        id: "han-01",
+        question: "Como recepcionar e triar um paciente com suspeita de hanseníase?",
+        department: "Recepção / Enfermagem",
+        answer:
+          "O paciente que procura atendimento com manchas na pele, dormência, formigamento ou perda de sensibilidade deve ser encaminhado para triagem e avaliação médica.",
         steps: [
-          { step: 1, instruction: "Greet the patient and ask for their name and date of birth to confirm identity." },
-          { step: 2, instruction: "Locate the pre-admission record in the HIS using the MRN or appointment number." },
-          { step: 3, instruction: "Verify that all pre-admission documents are on file; if any are missing, collect them now." },
-          { step: 4, instruction: "Confirm the patient's current address, emergency contact, and primary care physician." },
-          { step: 5, instruction: "Issue the patient's wristband (print from the HIS wristband module) and verify the information with the patient before applying." },
-          { step: 6, instruction: "Assign the patient to their designated bed and notify the receiving ward nurse via the HIS bed management module." },
-          { step: 7, instruction: "Provide the patient with the 'Patient Rights & Responsibilities' brochure and the ward orientation guide." },
+          { step: 1, instruction: "Paciente relata manchas na pele, dormência, formigamento ou perda de sensibilidade." },
+          { step: 2, instruction: "Profissional da recepção realiza acolhimento e aciona médico ou enfermeira para definir quem fará o atendimento." },
+          { step: 3, instruction: "Encaminhar para a triagem de enfermagem se houver sinais sugestivos de hanseníase." },
+          { step: 4, instruction: "Enfermeira ou técnica de enfermagem realiza avaliação preliminar: identifica lesões suspeitas e verifica histórico familiar e tempo de evolução." },
+          { step: 5, instruction: "Se houver suspeita consistente: encaminhar para avaliação médica." },
+          { step: 6, instruction: "Se não houver suspeita: orientar o paciente e agendar retorno conforme necessidade." },
         ],
-        note: "Always use two patient identifiers (name + date of birth) before applying the wristband. Never use room number as an identifier.",
       },
       {
-        id: "reg-02",
-        question: "How should I handle a walk-in patient requesting emergency admission?",
-        department: "Emergency Department (ED) Triage",
-        answer: "Walk-in patients presenting with urgent or emergent conditions must be triaged immediately. Do not delay triage to complete administrative registration.",
+        id: "han-02",
+        question: "Como realizar o exame dermatoneurológico e confirmar o diagnóstico de hanseníase?",
+        department: "Médico",
+        answer:
+          "O diagnóstico é clínico, baseado no exame dermatoneurológico completo. Avalia-se manchas, sensibilidade, nervos periféricos e força muscular.",
         steps: [
-          { step: 1, instruction: "Escort the patient to the triage nurse immediately upon arrival." },
-          { step: 2, instruction: "The triage nurse assigns an ESI (Emergency Severity Index) level (1–5) within 2 minutes." },
-          { step: 3, instruction: "For ESI 1 or 2: activate the emergency team and move the patient to a treatment room before completing registration." },
-          { step: 4, instruction: "For ESI 3–5: complete a brief administrative registration (name, DOB, chief complaint) and direct the patient to the waiting area." },
-          { step: 5, instruction: "Collect full registration details (ID, insurance, contacts) once the patient is stabilized." },
-          { step: 6, instruction: "Document the triage time and ESI level in the ED module of the HIS." },
+          { step: 1, instruction: "Realizar anamnese detalhada e exame dermatoneurológico completo." },
+          { step: 2, instruction: "Avaliar manchas hipocrômicas, eritematosas ou infiltradas." },
+          { step: 3, instruction: "Testar sensibilidade térmica, tátil e dolorosa nas lesões." },
+          { step: 4, instruction: "Verificar espessamento ou dor em nervos periféricos (nervo ulnar, fibular, auricular magno)." },
+          { step: 5, instruction: "Avaliar força muscular e presença de neurites." },
+          { step: 6, instruction: "Se suspeita confirmada: solicitar exames complementares (baciloscopia de linfa, quando disponível)." },
+          { step: 7, instruction: "Classificar operacionalmente: Paucibacilar (PB) = até 5 lesões e poucos nervos acometidos; Multibacilar (MB) = mais de 5 lesões e/ou múltiplos nervos acometidos." },
+          { step: 8, instruction: "Registrar o caso como confirmado no prontuário e no SINAN." },
         ],
-        note: "If the patient is unconscious or unable to provide information, use the 'Unknown Patient' protocol and assign a temporary MRN.",
+        note: "Garantir privacidade e sigilo no atendimento para evitar estigma. Não é necessário isolamento (doença de baixa transmissibilidade). Usar luvas para manipular lesões e curativos; higienizar as mãos antes e após o contato.",
       },
       {
-        id: "reg-03",
-        question: "How do I create a new patient record for a first-time admission?",
-        department: "Admissions Office",
-        answer: "New patients must have a unique Medical Record Number (MRN) created before any clinical activity is recorded.",
+        id: "han-03",
+        question: "Como iniciar e acompanhar o tratamento com Poliquimioterapia (PQT)?",
+        department: "Médico / Enfermeira",
+        answer:
+          "A PQT é o tratamento padrão, gratuito no SUS. O início deve ser imediato após a confirmação diagnóstica, com doses supervisionadas mensais na USF.",
         steps: [
-          { step: 1, instruction: "In the HIS, navigate to Patient Management > New Patient Registration." },
-          { step: 2, instruction: "Search by full name and date of birth to confirm the patient does not already have a record (to prevent duplicate MRNs)." },
-          { step: 3, instruction: "If no record exists, click 'Create New Patient' and enter all mandatory fields: full legal name, date of birth, gender, address, and contact number." },
-          { step: 4, instruction: "Scan and attach the government-issued ID to the new record." },
-          { step: 5, instruction: "The system will automatically generate a unique MRN. Print the MRN label and attach it to the physical file." },
-          { step: 6, instruction: "Proceed with the standard check-in procedure using the new MRN." },
+          { step: 1, instruction: "PB (Paucibacilar): Rifampicina + Dapsona — 6 doses supervisionadas mensais." },
+          { step: 2, instruction: "MB (Multibacilar): Rifampicina + Clofazimina + Dapsona — 12 doses supervisionadas mensais." },
+          { step: 3, instruction: "Enfermeira supervisiona as doses mensais e orienta quanto à adesão." },
+          { step: 4, instruction: "Médico avalia reações adversas e acompanha a evolução clínica." },
+          { step: 5, instruction: "Avaliar em cada consulta: adesão, evolução clínica e presença de reações hansênicas." },
+          { step: 6, instruction: "Reforçar autocuidado: hidratação da pele, proteção dos olhos e pés, calçados adequados, evitar queimaduras e ferimentos por perda de sensibilidade." },
+          { step: 7, instruction: "Orientar que a hanseníase tem cura, o tratamento é gratuito no SUS e a transmissão cessa após a 1ª dose supervisionada." },
+        ],
+        note: "O paciente deixa de transmitir a doença após a 1ª dose supervisionada. Informar isso ao paciente e à família para combater o estigma social.",
+      },
+      {
+        id: "han-04",
+        question: "Como realizar a notificação, investigação dos contatos domiciliares e encerramento do caso?",
+        department: "Enfermeira / ACS",
+        answer:
+          "A busca ativa de contatos domiciliares é obrigatória. A notificação no SINAN e o acompanhamento pós-alta garantem a vigilância epidemiológica adequada.",
+        steps: [
+          { step: 1, instruction: "Notificar o caso no SINAN. Profissional responsável: enfermeira." },
+          { step: 2, instruction: "Informar a Vigilância Epidemiológica Municipal." },
+          { step: 3, instruction: "Organizar acompanhamento mensal e controle de doses supervisionadas." },
+          { step: 4, instruction: "ACS e enfermeira realizam visita domiciliar e exame dermatoneurológico de todos os contatos próximos." },
+          { step: 5, instruction: "Orientar contatos sobre sinais e sintomas da doença e importância do retorno periódico à unidade." },
+          { step: 6, instruction: "Após completar o esquema de PQT e cessar sinais de atividade: avaliar possíveis incapacidades e sequelas (IMPORTANTE!)." },
+          { step: 7, instruction: "Encerrar o caso no SINAN, programar reavaliações pós-alta e reforçar ações educativas e busca ativa de novos casos." },
         ],
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────────
+  // TOXOPLASMOSE
+  // ─────────────────────────────────────────────────────────────
   {
-    id: "clinical-assessment",
-    label: "Clinical Assessment",
-    description: "Initial nursing and medical assessments required at the time of admission.",
-    color: "border-green-500",
-    bgColor: "bg-green-50 text-green-700",
-    icon: "Stethoscope",
-    items: [
-      {
-        id: "ca-01",
-        question: "What is included in the initial nursing admission assessment?",
-        department: "Nursing",
-        answer: "The initial nursing assessment must be completed within 2 hours of the patient's arrival on the ward. It establishes a clinical baseline and identifies immediate care needs.",
-        steps: [
-          { step: 1, instruction: "Obtain and document vital signs: blood pressure, heart rate, respiratory rate, temperature, and oxygen saturation (SpO₂)." },
-          { step: 2, instruction: "Assess and document the patient's pain level using the NRS (Numeric Rating Scale, 0–10)." },
-          { step: 3, instruction: "Complete the Fall Risk Assessment using the Morse Fall Scale; apply fall prevention measures if the score is ≥ 45." },
-          { step: 4, instruction: "Perform a skin integrity assessment and document any existing wounds, bruises, or pressure injuries using the Braden Scale." },
-          { step: 5, instruction: "Record the patient's current medications (name, dose, frequency, last dose taken)." },
-          { step: 6, instruction: "Document known allergies and adverse drug reactions in the allergy section of the HIS; apply the allergy wristband if applicable." },
-          { step: 7, instruction: "Complete the Nutritional Screening Tool (NST); refer to the dietitian if the score indicates nutritional risk." },
-          { step: 8, instruction: "Document all findings in the Nursing Admission Assessment form (NAA-03) in the HIS." },
-        ],
-        note: "If the patient is unable to provide history, obtain information from the accompanying family member or caregiver and document the source.",
-      },
-      {
-        id: "ca-02",
-        question: "How do I complete the medication reconciliation process at admission?",
-        department: "Nursing / Pharmacy",
-        answer: "Medication reconciliation at admission prevents medication errors and adverse events. It must be completed within 4 hours of admission.",
-        steps: [
-          { step: 1, instruction: "Collect the patient's complete medication list: prescription drugs, over-the-counter medications, vitamins, and herbal supplements." },
-          { step: 2, instruction: "Verify the list against the patient's pharmacy records (accessible via the HIS Pharmacy Integration module)." },
-          { step: 3, instruction: "Document the reconciled medication list in the HIS under 'Medication Reconciliation'." },
-          { step: 4, instruction: "Identify any discrepancies (omissions, duplications, or dose differences) and report them to the admitting physician." },
-          { step: 5, instruction: "The physician reviews and approves the reconciled list, entering admission medication orders accordingly." },
-          { step: 6, instruction: "Notify the pharmacy of any high-alert medications (anticoagulants, insulin, opioids) for additional verification." },
-        ],
-        note: "Patients on anticoagulant therapy must have a dedicated anticoagulation management note created at the time of reconciliation.",
-      },
-      {
-        id: "ca-03",
-        question: "What is the procedure for admitting a patient with known infectious disease?",
-        department: "Infection Control / Nursing",
-        answer: "Patients with confirmed or suspected infectious conditions require isolation precautions to be implemented immediately upon arrival.",
-        steps: [
-          { step: 1, instruction: "Identify the transmission route: contact, droplet, or airborne (refer to the Infection Control Manual, Table 3)." },
-          { step: 2, instruction: "Assign the patient to an appropriate isolation room; contact the Bed Management team if no isolation room is available." },
-          { step: 3, instruction: "Place the correct isolation signage on the room door (color-coded: yellow = contact, blue = droplet, red = airborne)." },
-          { step: 4, instruction: "Don the appropriate PPE before entering the room (refer to PPE donning/doffing posters outside the room)." },
-          { step: 5, instruction: "Notify the Infection Control Nurse (ICN) via the HIS alert system within 1 hour of identification." },
-          { step: 6, instruction: "Document the isolation precautions in the patient's care plan and flag the HIS record with the relevant infection alert." },
-        ],
-        note: "Do not transport the patient through common areas without a mask and appropriate cover. Coordinate transport with the ICN.",
-      },
-    ],
-  },
-  {
-    id: "documentation",
-    label: "Documentation & Consent",
-    description: "Required documentation, consent forms, and legal compliance during the admission process.",
-    color: "border-amber-500",
-    bgColor: "bg-amber-50 text-amber-700",
-    icon: "FileText",
-    items: [
-      {
-        id: "doc-01",
-        question: "Which consent forms are required for a standard inpatient admission?",
-        department: "Admissions Office / Nursing",
-        answer: "Informed consent is a legal and ethical requirement. The following forms must be signed before any clinical intervention begins.",
-        steps: [
-          { step: 1, instruction: "Consent for Treatment (CT-02): General consent for routine hospital care. Must be signed at registration." },
-          { step: 2, instruction: "Privacy Notice Acknowledgment (PNA-01): Acknowledges the patient has received the hospital's privacy policy (HIPAA/LGPD). Required at first admission." },
-          { step: 3, instruction: "Financial Responsibility Agreement (FRA-03): Confirms the patient's understanding of billing and payment obligations." },
-          { step: 4, instruction: "Surgical/Procedural Consent (SC-05): Specific to each planned procedure; must be obtained by the performing physician, not by nursing or administrative staff." },
-          { step: 5, instruction: "Blood Transfusion Consent (BTC-01): Required if transfusion is anticipated; document refusal if the patient declines." },
-          { step: 6, instruction: "Research Consent (RC-07): Only required if the patient is enrolled in a clinical study." },
-        ],
-        note: "Consent must be obtained in the patient's preferred language. Request an interpreter through the HIS Language Services module if needed.",
-      },
-      {
-        id: "doc-02",
-        question: "How do I document a patient's refusal of treatment?",
-        department: "Nursing / Medical Staff",
-        answer: "A patient's right to refuse treatment must be respected and documented thoroughly to protect both the patient and the clinical team.",
-        steps: [
-          { step: 1, instruction: "Ensure the patient has been fully informed of the risks of refusing the proposed treatment." },
-          { step: 2, instruction: "Notify the attending physician immediately." },
-          { step: 3, instruction: "Complete the 'Refusal of Treatment' form (RT-04) with the patient; document the specific treatment refused and the reason given." },
-          { step: 4, instruction: "Have the patient sign the form; if the patient refuses to sign, document this refusal in the form and have a witness sign." },
-          { step: 5, instruction: "Scan and upload the signed form to the patient's HIS record under 'Legal Documents'." },
-          { step: 6, instruction: "Document the incident in the nursing notes, including the time, the physician notified, and the patient's stated reason." },
-        ],
-        note: "If there are concerns about the patient's decision-making capacity, contact the Ethics Committee or the on-call psychiatrist for a capacity assessment.",
-      },
-      {
-        id: "doc-03",
-        question: "How should I handle admission documentation for a minor patient?",
-        department: "Admissions Office",
-        answer: "Patients under 18 years of age require parental or legal guardian consent for all medical interventions. Additional documentation is required.",
-        steps: [
-          { step: 1, instruction: "Verify the identity of the parent or legal guardian using a government-issued ID." },
-          { step: 2, instruction: "Confirm legal guardianship if the accompanying adult is not the biological parent (court order or guardianship certificate required)." },
-          { step: 3, instruction: "All consent forms must be signed by the parent or legal guardian, not by the minor." },
-          { step: 4, instruction: "Document the guardian's name, relationship to the patient, and contact number in the HIS." },
-          { step: 5, instruction: "For emancipated minors (married, military, or court-declared), obtain and file the emancipation documentation before proceeding." },
-        ],
-        note: "Minors aged 16–17 may consent to certain treatments independently depending on local legislation. Consult the Legal Department if uncertain.",
-      },
-    ],
-  },
-  {
-    id: "bed-management",
-    label: "Bed Management",
-    description: "Procedures for bed assignment, transfers, and capacity management during patient admission.",
+    id: "toxoplasmose",
+    label: "Toxoplasmose",
+    description:
+      "Rastreamento sorológico, diagnóstico e manejo da toxoplasmose gestacional e congênita no pré-natal da USF.",
     color: "border-violet-500",
     bgColor: "bg-violet-50 text-violet-700",
-    icon: "BedDouble",
+    icon: "Cat",
     items: [
       {
-        id: "bm-01",
-        question: "How do I assign a bed to an incoming patient?",
-        department: "Bed Management / Nursing",
-        answer: "Bed assignment must consider the patient's clinical needs, isolation requirements, and ward capacity. Follow the steps below.",
+        id: "tox-01",
+        question: "Como realizar o rastreamento de toxoplasmose no pré-natal?",
+        department: "Enfermeira / Médica / Pré-Natal",
+        answer:
+          "O rastreamento sorológico (IgG e IgM) deve ser solicitado na primeira consulta de pré-natal e repetido conforme o resultado, com orientações preventivas em todos os atendimentos.",
         steps: [
-          { step: 1, instruction: "Access the Bed Management dashboard in the HIS (Home > Bed Management > Available Beds)." },
-          { step: 2, instruction: "Filter beds by ward, bed type (standard, monitored, isolation), and gender (if applicable)." },
-          { step: 3, instruction: "Select the most appropriate available bed based on the patient's clinical condition and admission order." },
-          { step: 4, instruction: "Click 'Assign Bed' and link the bed to the patient's MRN." },
-          { step: 5, instruction: "Notify the receiving ward charge nurse via the HIS messaging system and by phone." },
-          { step: 6, instruction: "Update the bed status to 'Occupied — Pending Arrival' until the patient physically arrives on the ward." },
+          { step: 1, instruction: "Gestante comparece à USF para consulta de pré-natal ou relatando sintomas inespecíficos." },
+          { step: 2, instruction: "Recepção realiza acolhimento e registro no sistema. Se em início de pré-natal: encaminhar para triagem de enfermagem." },
+          { step: 3, instruction: "Técnica de enfermagem realiza acolhimento inicial, avaliação dos sinais e sintomas e registra sinais vitais." },
+          { step: 4, instruction: "Enfermeira coleta informações sobre hábitos alimentares, contato com gatos, jardinagem e ingestão de carne crua." },
+          { step: 5, instruction: "Solicitar sorologia para toxoplasmose (IgM e IgG) como parte dos exames de rotina do pré-natal." },
+          { step: 6, instruction: "Encaminhar para consulta médica ou com a enfermeira do pré-natal." },
         ],
-        note: "Do not assign a bed that is pending housekeeping clearance. Check the bed status icon before assignment.",
       },
       {
-        id: "bm-02",
-        question: "What is the procedure when no beds are available at the time of admission?",
-        department: "Bed Management / Administration",
-        answer: "When the hospital reaches full capacity, a structured escalation process must be followed to ensure patient safety.",
+        id: "tox-02",
+        question: "Como interpretar os resultados sorológicos e qual a conduta em cada situação?",
+        department: "Médica / Enfermeira",
+        answer:
+          "A interpretação correta da sorologia define a conduta imediata. Casos com IgM positivo requerem ação rápida para reduzir o risco de transmissão fetal.",
         steps: [
-          { step: 1, instruction: "Notify the Bed Management Coordinator and the Nursing Supervisor immediately." },
-          { step: 2, instruction: "Review the discharge list for patients expected to be discharged within the next 2–4 hours." },
-          { step: 3, instruction: "Activate the 'Capacity Alert' in the HIS to notify all ward charge nurses to expedite pending discharges." },
-          { step: 4, instruction: "If the patient requires urgent admission (ESI 1–2), the Medical Director may authorize a temporary overflow bed in a designated area." },
-          { step: 5, instruction: "For elective admissions, contact the patient and the referring physician to discuss rescheduling." },
-          { step: 6, instruction: "Document all capacity management actions in the HIS Incident Log." },
+          { step: 1, instruction: "IgG negativo + IgM negativo (Suscetível): gestante não imune → reforçar orientações preventivas e repetir sorologia trimestralmente." },
+          { step: 2, instruction: "IgG positivo + IgM negativo (Imune): gestante imune → manter acompanhamento de rotina do pré-natal." },
+          { step: 3, instruction: "IgM positivo (com ou sem IgG): suspeita de infecção aguda → solicitar teste de avidez do IgG." },
+          { step: 4, instruction: "Teste de avidez — ALTA avidez: infecção antiga (antes da gestação), sem risco fetal." },
+          { step: 5, instruction: "Teste de avidez — BAIXA avidez: infecção recente (durante a gestação) → iniciar tratamento e notificar." },
         ],
-        note: "The hospital's Surge Capacity Plan (SCP-01) provides additional escalation steps for mass casualty or pandemic scenarios.",
+        note: "Caso haja infecção recente confirmada: notificar e encaminhar para o Pré-Natal de Alto Risco (PNAR) e iniciar condutas terapêuticas conforme protocolo.",
       },
       {
-        id: "bm-03",
-        question: "How do I process an internal patient transfer between wards?",
-        department: "Nursing / Bed Management",
-        answer: "Internal transfers require clinical handover, updated documentation, and coordination between the sending and receiving units.",
+        id: "tox-03",
+        question: "Qual é a conduta terapêutica inicial e como encaminhar para o pré-natal de alto risco?",
+        department: "Médica",
+        answer:
+          "O tratamento deve ser iniciado o mais precocemente possível após a confirmação de infecção recente, com encaminhamento imediato para serviço especializado.",
         steps: [
-          { step: 1, instruction: "Obtain a physician's transfer order in the HIS before initiating any transfer." },
-          { step: 2, instruction: "The sending nurse completes the SBAR (Situation, Background, Assessment, Recommendation) handover with the receiving nurse." },
-          { step: 3, instruction: "Update the patient's bed assignment in the HIS Bed Management module." },
-          { step: 4, instruction: "Ensure all medications, belongings, and the physical patient file accompany the patient." },
-          { step: 5, instruction: "The receiving nurse verifies the patient's identity (name + DOB) and confirms the wristband information upon arrival." },
-          { step: 6, instruction: "Document the transfer time and the receiving nurse's name in the HIS nursing notes." },
+          { step: 1, instruction: "Iniciar Espiramicina 500 mg a cada 8 horas até avaliação especializada." },
+          { step: 2, instruction: "Reforçar a importância da adesão ao tratamento e dos retornos mensais." },
+          { step: 3, instruction: "Registrar o caso no prontuário e comunicar à Vigilância Epidemiológica Municipal." },
+          { step: 4, instruction: "Encaminhar a gestante para o Pré-Natal de Alto Risco (PNAR) em unidade de referência especializada." },
+          { step: 5, instruction: "No serviço de referência serão realizados: ultrassonografia morfológica seriada; avaliação fetal para sinais de infecção congênita; PCR para Toxoplasma gondii no líquido amniótico, se indicado." },
+          { step: 6, instruction: "Manter retorno à USF para seguimento conjunto e monitoramento da adesão. O serviço de alto risco ajusta a conduta conforme fase gestacional e resultados." },
+        ],
+      },
+      {
+        id: "tox-04",
+        question: "Quais orientações preventivas devem ser reforçadas para gestantes suscetíveis?",
+        department: "Equipe de Pré-Natal / ACS",
+        answer:
+          "Gestantes suscetíveis (IgG e IgM negativos) devem receber orientações claras a cada consulta, pois não há vacina disponível contra a toxoplasmose.",
+        steps: [
+          { step: 1, instruction: "Evitar comer carne crua ou malpassada." },
+          { step: 2, instruction: "Lavar bem frutas, verduras e utensílios de cozinha com água corrente." },
+          { step: 3, instruction: "Usar luvas ao manipular solo e ao praticar jardinagem; lavar as mãos após." },
+          { step: 4, instruction: "Evitar contato direto com fezes de gatos; delegar a limpeza da caixa de areia para outra pessoa." },
+          { step: 5, instruction: "Consumir apenas água tratada ou fervida." },
+          { step: 6, instruction: "Manter higiene rigorosa das mãos e utensílios em toda a manipulação de alimentos." },
+          { step: 7, instruction: "Garantir apoio psicológico e social à gestante, quando necessário." },
+        ],
+        note: "Gatos domésticos alimentados com ração industrializada e sem acesso à rua têm baixo risco de transmissão. O risco está na eliminação fecal de oocistos. Reforçar essas orientações em todas as consultas enquanto a gestante permanecer suscetível.",
+      },
+      {
+        id: "tox-05",
+        question: "Como monitorar o recém-nascido e encerrar o caso após o parto?",
+        department: "Enfermeira / Médica",
+        answer:
+          "Após o parto, a USF deve garantir a continuidade do cuidado, notificando casos confirmados e acompanhando o recém-nascido em conjunto com o pediatra.",
+        steps: [
+          { step: 1, instruction: "Notificar o caso confirmado de toxoplasmose gestacional e/ou congênita no SINAN. Profissional responsável: enfermeira da USF." },
+          { step: 2, instruction: "Comunicar à Vigilância Epidemiológica Municipal." },
+          { step: 3, instruction: "Acompanhar o recém-nascido em conjunto com o pediatra." },
+          { step: 4, instruction: "Realizar sorologia e exames complementares no recém-nascido conforme orientação pediátrica." },
+          { step: 5, instruction: "Encaminhar para serviço de referência neonatal se houver sinais de infecção congênita." },
+          { step: 6, instruction: "Após parto e finalização do acompanhamento: avaliar desfechos clínicos, encerrar o caso no SINAN, registrar no prontuário e reforçar orientações preventivas para futuras gestações." },
         ],
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────────
+  // IST / HIV
+  // ─────────────────────────────────────────────────────────────
   {
-    id: "special-cases",
-    label: "Special Cases",
-    description: "Admission procedures for patients requiring special handling, including VIPs, unidentified patients, and psychiatric admissions.",
-    color: "border-rose-500",
-    bgColor: "bg-rose-50 text-rose-700",
-    icon: "ShieldAlert",
+    id: "ist-hiv",
+    label: "IST's / HIV",
+    description:
+      "Testagem rápida para HIV, sífilis e hepatites B e C, aconselhamento pré e pós-teste, notificação sigilosa e encaminhamento para o SAE/CTA.",
+    color: "border-red-500",
+    bgColor: "bg-red-50 text-red-700",
+    icon: "Shield",
     items: [
       {
-        id: "sc-01",
-        question: "What is the protocol for admitting an unidentified (unknown) patient?",
-        department: "Emergency Department / Admissions",
-        answer: "Unidentified patients must receive immediate care while the hospital works to establish their identity. A temporary record must be created.",
+        id: "hiv-01",
+        question: "Como realizar o acolhimento e a triagem de enfermagem para testagem de IST/HIV?",
+        department: "Recepção / Enfermeira",
+        answer:
+          "O acolhimento deve garantir sigilo e escuta humanizada desde a recepção. A triagem avalia fatores de risco e oferece testagem para HIV, sífilis e hepatites.",
         steps: [
-          { step: 1, instruction: "Create a temporary patient record in the HIS using the 'Unknown Patient' protocol (prefix: UNK + date + sequential number, e.g., UNK-20260326-001)." },
-          { step: 2, instruction: "Document all available physical descriptors (approximate age, gender, distinguishing features) in the record." },
-          { step: 3, instruction: "Photograph any personal belongings and store them in the Security Office with a numbered tag linked to the temporary MRN." },
-          { step: 4, instruction: "Notify the hospital's Social Work department and the local police authority as required by law." },
-          { step: 5, instruction: "Once identity is confirmed, merge the temporary record with the patient's permanent MRN using the HIS 'Record Merge' function." },
-          { step: 6, instruction: "Notify the Social Worker and update all clinical documentation with the confirmed identity." },
+          { step: 1, instruction: "Recepção realiza acolhimento inicial, garantindo sigilo e escuta humanizada." },
+          { step: 2, instruction: "Profissional da recepção ou ACS identifica o motivo da visita (suspeita, sintomas ou solicitação de testagem)." },
+          { step: 3, instruction: "Direcionar o usuário para a triagem de enfermagem, onde será feito o teste rápido." },
+          { step: 4, instruction: "Enfermeira realiza escuta qualificada: histórico sexual, presença de ISTs, uso de preservativos e fatores de risco." },
+          { step: 5, instruction: "Oferecer testes rápidos para ISTs: HIV, sífilis, hepatites B e C." },
         ],
-        note: "Never discard or alter the temporary record. The merge function preserves all clinical data entered under the temporary MRN.",
+        note: "Em casos de feriados e fins de semana, a testagem e o protocolo de PEP são feitos no Hospital Luís Argolo.",
       },
       {
-        id: "sc-02",
-        question: "How should I handle the admission of a VIP or high-profile patient?",
-        department: "Administration / Nursing",
-        answer: "VIP admissions require additional privacy and security measures. Discretion is mandatory for all staff involved in the patient's care.",
+        id: "hiv-02",
+        question: "Como realizar o teste rápido com aconselhamento pré e pós-teste?",
+        department: "Enfermeira",
+        answer:
+          "O teste deve ser feito em sala específica com privacidade e biossegurança, seguindo as diretrizes da Política Nacional de IST/AIDS para aconselhamento.",
         steps: [
-          { step: 1, instruction: "Notify the Hospital Administrator and the Privacy Officer immediately upon identification of a VIP patient." },
-          { step: 2, instruction: "Assign the patient to a private room; coordinate with Security to assess the need for restricted floor access." },
-          { step: 3, instruction: "Flag the patient's HIS record with the 'Restricted Access' tag; only authorized staff may view the record." },
-          { step: 4, instruction: "Do not confirm or deny the patient's presence to any external inquiries, including media. Refer all inquiries to the Communications Department." },
-          { step: 5, instruction: "Limit the number of staff with direct patient contact to those strictly necessary for care." },
-          { step: 6, instruction: "Document all access to the patient's HIS record in the audit log." },
+          { step: 1, instruction: "Realizar o teste em sala específica, com privacidade e medidas de biossegurança." },
+          { step: 2, instruction: "ACONSELHAMENTO PRÉ-TESTE: explicação sobre o exame, formas de prevenção e significado dos possíveis resultados." },
+          { step: 3, instruction: "Realizar a coleta conforme protocolo do Ministério da Saúde." },
+          { step: 4, instruction: "RESULTADO NÃO REAGENTE (Negativo): reforçar orientações de prevenção combinada (preservativos, PrEP/PEP quando indicado, com retirada no CTA) e periodicidade da testagem. Liberar com acompanhamento de rotina." },
+          { step: 5, instruction: "RESULTADO REAGENTE (Positivo): comunicar o resultado de forma sigilosa, empática e acolhedora. Realizar teste confirmatório conforme fluxo laboratorial preconizado. Notificar sigilosamente ao SINAN." },
         ],
-        note: "Any breach of VIP patient privacy must be reported to the Privacy Officer within 1 hour and documented as a critical incident.",
       },
       {
-        id: "sc-03",
-        question: "What is the procedure for an involuntary psychiatric admission?",
-        department: "Psychiatry / Legal / Nursing",
-        answer: "Involuntary psychiatric admissions are governed by local mental health legislation and require strict adherence to legal and clinical protocols.",
+        id: "hiv-03",
+        question: "Como encaminhar e acompanhar o paciente com resultado reagente para HIV?",
+        department: "Médico / Enfermeira",
+        answer:
+          "O resultado reagente requer encaminhamento imediato ao serviço especializado e acompanhamento conjunto e longitudinal entre o SAE/CTA e a USF.",
         steps: [
-          { step: 1, instruction: "Confirm that the legal criteria for involuntary admission are met (imminent risk to self or others, inability to consent due to mental illness)." },
-          { step: 2, instruction: "A psychiatrist or authorized physician must complete the 'Certificate for Involuntary Admission' (CIA-01) form." },
-          { step: 3, instruction: "Notify the hospital's Legal Department and the patient's next of kin (if known) within 2 hours." },
-          { step: 4, instruction: "Assign the patient to a secure psychiatric unit bed; coordinate with the Psychiatric Nursing team." },
-          { step: 5, instruction: "Document the legal basis for admission, the physician's assessment, and all notifications in the HIS." },
-          { step: 6, instruction: "Inform the patient of their rights under the applicable mental health act, in a language they understand." },
+          { step: 1, instruction: "Encaminhar ao SAE (Serviço de Atenção Especializada) ou CTA (Centro de Testagem e Aconselhamento) para: confirmação diagnóstica (Western Blot ou carga viral), avaliação clínica inicial e início do tratamento antirretroviral (TARV)." },
+          { step: 2, instruction: "O acompanhamento multiprofissional no SAE/CTA inclui: infectologista, enfermeiro, farmacêutico, psicólogo e assistente social." },
+          { step: 3, instruction: "A USF continua responsável pelo seguimento longitudinal: monitoramento da adesão ao TARV, prevenção e tratamento de infecções oportunistas, suporte psicológico e social." },
+          { step: 4, instruction: "Orientar sobre formas de transmissão e prevenção, inclusive para parceiros." },
+          { step: 5, instruction: "IMPORTANTE: encaminhar parceiros sexuais para testagem!" },
+          { step: 6, instruction: "Acompanhamento periódico no SAE e na USF; atualizar resultados laboratoriais (carga viral e CD4) no CTA." },
         ],
-        note: "Involuntary admission must be reviewed by a psychiatrist within 24 hours. Set a review reminder in the HIS at the time of admission.",
+        note: "Garantir sigilo e respeito à confidencialidade em todo o processo. A notificação ao SINAN deve ser sigilosa. Aconselhamento sobre a importância do uso contínuo da medicação, mesmo sem sintomas.",
+      },
+      {
+        id: "hiv-04",
+        question: "Como realizar ações de vigilância e prevenção comunitária de ISTs/HIV?",
+        department: "ACS / Equipe de Saúde",
+        answer:
+          "As ações educativas no território são fundamentais para a prevenção primária e o combate ao estigma relacionado às ISTs e ao HIV.",
+        steps: [
+          { step: 1, instruction: "ACS e equipe de saúde desenvolvem campanhas sobre ISTs e prevenção combinada no território." },
+          { step: 2, instruction: "Distribuir preservativos e material informativo." },
+          { step: 3, instruction: "Incentivar a testagem voluntária e o combate ao estigma." },
+          { step: 4, instruction: "Avaliação de condições clínicas associadas: coinfecções e comorbidades." },
+          { step: 5, instruction: "Revisão contínua do plano de cuidado e fortalecimento do vínculo com a equipe." },
+        ],
       },
     ],
   },
