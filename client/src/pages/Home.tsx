@@ -44,6 +44,18 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Shield,
 };
 
+const categoryThemeStyles: Record<
+  string,
+  { border: string; text: string; bg: string }
+> = {
+  tuberculose: { border: "#10b981", text: "#047857", bg: "#d1fae5" },
+  covid19: { border: "#3b82f6", text: "#1d4ed8", bg: "#dbeafe" },
+  arboviroses: { border: "#f97316", text: "#c2410c", bg: "#ffedd5" },
+  hanseniase: { border: "#ec4899", text: "#be185d", bg: "#fce7f3" },
+  toxoplasmose: { border: "#8b5cf6", text: "#6d28d9", bg: "#ede9fe" },
+  "ist-hiv": { border: "#ef4444", text: "#b91c1c", bg: "#fee2e2" },
+};
+
 // ── Category Tab ──────────────────────────────────────────────────────────────
 function CategoryTab({
   category,
@@ -55,16 +67,23 @@ function CategoryTab({
   onClick: () => void;
 }) {
   const Icon = iconMap[category.icon] ?? ClipboardList;
+  const [hovered, setHovered] = useState(false);
+  const theme = categoryThemeStyles[category.id] ?? { border: "#0f766e", text: "#0f766e" };
+
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-3 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border
-        ${
-          isActive
-            ? "bg-teal-700 text-white border-teal-700 shadow-md"
-            : "bg-white text-slate-600 border-slate-200 hover:border-teal-400 hover:text-teal-700"
-        }`}
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`flex items-center gap-2 px-3 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border ${
+        isActive ? "shadow-md" : "text-slate-600 hover:text-slate-900"
+      }`}
+      style={{
+        fontFamily: "'DM Sans', sans-serif",
+        borderColor: isActive || hovered ? theme.border : undefined,
+        backgroundColor: isActive ? theme.bg : hovered ? "#f8fafc" : "#ffffff",
+        color: isActive || hovered ? theme.text : undefined,
+      }}
       title={category.label}
     >
       <Icon className="w-4 h-4 shrink-0" />
