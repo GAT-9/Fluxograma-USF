@@ -1,0 +1,43 @@
+# Dependencies
+node_modules
+
+# Dev dependencies
+.pnpm-lock.yaml
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build outputs (keep dist)
+# dist is needed for production
+
+# Source files (not needed in production)
+client/src
+server/src
+*.ts
+*.tsx
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
+
+# Dev tools and configs
+.manus-logs
+.git
+.gitignore
+.env.local
+.env.*.local
+.eslintrc
+.prettierrc
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Documentation (optional)
+README.md
+IDEAS.md
+
+# Other
+.DS_Store
+Thumbs.db
