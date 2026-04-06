@@ -433,7 +433,8 @@ export default function Home() {
             </span>
           </div>
           <p className="text-slate-400 text-xs text-center">
-            Uso interno. Atualizações via equipe PET.
+            © 2025 Copyright{" "}
+            <span className="font-bold">Desenvolvido pela equipe do GAT-9 PET-Saude Digital</span>. Todos os direitos reservados.
           </p>
         </div>
       </footer>
