@@ -1,7 +1,7 @@
-# Hospital Staff FAQ - Design Brainstorm
+# Portal USF Vereador Durval Samuel de Souza FAQ - Design Brainstorm
 
 ## Audience & Purpose
-Internal hospital staff reference page for patient admission activities.
+Internal Portal USF Vereador Durval Samuel de Souza reference page for patient admission activities.
 Tone: Professional, clear, trustworthy, efficient.
 
 ---
@@ -111,4 +111,4 @@ Card entrance: staggered fade-up (50ms delay between cards). Tab switch: 250ms c
 ---
 
 ## Selected Approach
-**Soft Clinical** — warm, approachable professionalism with card-based layout, category color-coding, and progressive disclosure. This best serves hospital staff who need to quickly find and read procedural information without visual fatigue.
+**Soft Clinical** — warm, approachable professionalism with card-based layout, category color-coding, and progressive disclosure. This best serves Portal USF Vereador Durval Samuel de Souza who need to quickly find and read procedural information without visual fatigue.

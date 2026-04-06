@@ -215,14 +215,16 @@ export default function Home() {
                 className="text-slate-800 font-bold text-sm leading-none block"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                Hospital Staff Portal
+                Portal USF Vereador Durval Samuel de Souza
               </span>
-              <span className="text-slate-400 text-xs">Patient Admission FAQ</span>
+              <span className="text-slate-400 text-xs">
+                Mapeamento de Processos Assistenciais
+              </span>
             </div>
           </div>
           <div className="hidden sm:flex items-center gap-1 text-xs text-slate-400">
             <span className="font-medium text-teal-700">{totalItems}</span>
-            <span>procedures documented</span>
+            <span>fluxogramas</span>
           </div>
         </div>
       </header>
@@ -248,19 +250,22 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <p className="text-teal-300 text-xs font-semibold uppercase tracking-widest mb-2">
-              Internal Reference Guide
+              Guia de Referência Interna
             </p>
             <h1
               className="text-white text-3xl md:text-4xl font-bold leading-tight mb-3"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Patient Admission
+              Protocolos Operacionais
               <br />
-              <span className="text-teal-300">Frequently Asked Questions</span>
+              <span className="text-teal-300">
+                de Admissão e Fluxo Assistencial
+              </span>
             </h1>
             <p className="text-slate-200 text-sm max-w-md leading-relaxed">
-              Step-by-step procedures for hospital staff covering all stages of the patient
-              admission process — from pre-admission to bed assignment.
+              Instruções passo a passo para a equipe da unidade, padronizando o
+              fluxo de trabalho desde a pré-admissão até a transferência para
+              unidade de internação.
             </p>
           </motion.div>
         </div>
@@ -274,9 +279,9 @@ export default function Home() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="Search procedures, departments, or keywords…"
+              placeholder="Busque por procedimentos, departamentos, ou palavras-chave…"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-9 py-2.5 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition"
               style={{ fontFamily: "'Lato', sans-serif" }}
             />
@@ -291,7 +296,7 @@ export default function Home() {
           </div>
           {/* Category tabs */}
           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-            {faqCategories.map((cat) => (
+            {faqCategories.map(cat => (
               <CategoryTab
                 key={cat.id}
                 category={cat}
@@ -316,12 +321,12 @@ export default function Home() {
                 className="text-slate-800 text-xl font-bold"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                Search Results
+                Resultados da Busca:
               </h2>
               <p className="text-slate-500 text-sm mt-1">
                 {globalResults.length === 0
-                  ? "No results found. Try different keywords."
-                  : `${globalResults.length} result${globalResults.length !== 1 ? "s" : ""} for "${searchQuery}"`}
+                  ? "Nenhum resultado encontrado. Tente palavras-chave diferentes."
+                  : `${globalResults.length} resultado${globalResults.length !== 1 ? "s" : ""} para "${searchQuery}"`}
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
@@ -356,7 +361,9 @@ export default function Home() {
                 {(() => {
                   const Icon = iconMap[currentCategory.icon] ?? ClipboardList;
                   return (
-                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${currentCategory.bgColor}`}>
+                    <div
+                      className={`w-9 h-9 rounded-lg flex items-center justify-center ${currentCategory.bgColor}`}
+                    >
                       <Icon className="w-5 h-5" />
                     </div>
                   );
@@ -368,14 +375,16 @@ export default function Home() {
                   {currentCategory.label}
                 </h2>
               </div>
-              <p className="text-slate-500 text-sm ml-12">{currentCategory.description}</p>
+              <p className="text-slate-500 text-sm ml-12">
+                {currentCategory.description}
+              </p>
             </motion.div>
 
             {/* FAQ cards grid */}
             <div className="grid gap-4 md:grid-cols-2">
               <AnimatePresence mode="wait">
                 {filteredItems.length > 0 ? (
-                  filteredItems.map((item) => (
+                  filteredItems.map(item => (
                     <FaqCard
                       key={item.id}
                       item={item}
@@ -391,7 +400,9 @@ export default function Home() {
                     className="col-span-2 text-center py-16 text-slate-400"
                   >
                     <Search className="w-10 h-10 mx-auto mb-3 opacity-40" />
-                    <p className="text-sm">No results found in this category.</p>
+                    <p className="text-sm">
+                      Nenhum resultado encontrado nesta categoria..
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -411,14 +422,11 @@ export default function Home() {
               className="text-slate-600 text-sm font-semibold"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Hospital Staff Portal
+              Portal USF Vereador Durval Samuel de Souza
             </span>
           </div>
           <p className="text-slate-400 text-xs text-center">
-            For internal use only. Contact the Admissions Office for updates or corrections.
-          </p>
-          <p className="text-slate-400 text-xs">
-            Last updated: March 2026
+            Uso interno. Atualizações via equipe PET Gat-9.
           </p>
         </div>
       </footer>

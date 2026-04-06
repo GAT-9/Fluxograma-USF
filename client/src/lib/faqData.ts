@@ -1,6 +1,6 @@
 /*
  * DESIGN PHILOSOPHY: Soft Clinical
- * FAQ data for hospital staff — Patient Admission activities.
+ * FAQ data for Portal USF Vereador Durval Samuel de Souza — Patient Admission activities.
  * Each category has a color accent and a set of FAQ items with step-by-step answers.
  */
 
