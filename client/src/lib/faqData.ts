@@ -1,7 +1,7 @@
 /*
  * FAQ data para Portal USF Vereador Durval Samuel de Souza
  * Fluxogramas Assistenciais de Vigilância em Saúde — equipe PET
- * Dados extraídos do documento oficial FLUXOGRAMAS_-_PET.docx
+ * Dados extraídos do documento FLUXOGRAMAS_-_PET.docx
  */
 
 export interface FaqStep {

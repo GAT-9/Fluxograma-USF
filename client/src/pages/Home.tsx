@@ -75,7 +75,7 @@ function CategoryTab({
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`flex items-center gap-2 px-3 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border ${
+      className={`shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border ${
         isActive ? "shadow-md" : "text-slate-600 hover:text-slate-900"
       }`}
       style={{
