@@ -126,7 +126,6 @@ function FaqCard({
 
   return (
     <motion.div
-      layout
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
@@ -278,16 +277,16 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-teal-300 text-xs font-semibold uppercase tracking-widest mb-2">
+            <p className="text-teal-300 text-xs font-semibold uppercase tracking-widest mb-2 inline-block">
               Guia de Referência Interna
             </p>
             <h1
               className="text-white text-3xl md:text-4xl font-bold leading-tight mb-3"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Fluxogramas de
-              <br />
-              <span className="text-teal-300">Vigilância em Saúde</span>
+            >Fluxogramas de
+              <br/>
+              <span className="text-cyan-300">
+              Vigilância em Saúde</span>
             </h1>
             <p className="text-slate-200 text-sm max-w-md leading-relaxed">
               Protocolos passo a passo para a equipe da unidade — desde a recepção até a
