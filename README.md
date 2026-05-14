@@ -1,16 +1,13 @@
-
 <div align="center">
    <img width="650" height="276" alt="image" src="https://fob.usp.br/wp-content/uploads/sites/179/2025/07/2025-08-22-pet-saude-1.jpg" />
 </div>
 <br>
 <br>
-
 # 📊 Fluxograma USF
 
 Sistema para modelagem, padronização e visualização de fluxos assistenciais em Unidades de Saúde da Família (USF), com foco na qualificação da Atenção Primária à Saúde (APS) no SUS.
 <br>
 <br>
-
 ## 🧭 Sobre o Projeto
 
 O Fluxograma USF foi desenvolvido no contexto do projeto PET-Saúde/Informação e Saúde Digital, com o objetivo de apoiar a organização dos processos de trabalho nas Unidades de Saúde da Família.
@@ -23,7 +20,7 @@ O Fluxograma USF foi desenvolvido no contexto do projeto PET-Saúde/Informação
 
 * Melhorar a comunicação entre profissionais
 
-* Reduzir inconsistências nos processos de atendimento <br>
+* Reduzir inconsistências nos processos de atendimento<br>
 
 Este projeto está alinhado às diretrizes da saúde digital no SUS e à necessidade de qualificação da gestão da informação em saúde.
 
@@ -51,9 +48,9 @@ Este projeto está alinhado às diretrizes da saúde digital no SUS e à necessi
 
 **Inserido na realidade do SUS, especialmente em territórios com desafios de:**
 
-- Fragmentação da informação <br>
-- Baixa interoperabilidade entre sistemas <br>
-- Necessidade de padronização dos fluxos assistenciais <br>
+- Fragmentação da informação<br>
+- Baixa interoperabilidade entre sistemas<br>
+- Necessidade de padronização dos fluxos assistenciais<br>
 
 ## ⚙️ Funcionalidades
 - 🧩 Criação de fluxogramas assistenciais<br>
