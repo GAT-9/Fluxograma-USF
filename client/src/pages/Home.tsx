@@ -24,8 +24,11 @@ import {
   Hand,
   Cat,
   Shield,
+  AlignCenter,
+  AlignCenterHorizontal,
 } from "lucide-react";
 import { faqCategories, type FaqCategory, type FaqItem } from "@/lib/faqData";
+import { useLocation } from "wouter";
 
 const HERO_IMAGE =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663479961843/M8AAzhPqVA4ZBQfdHmU4KC/hero-banner-jnKdddSVkMojRqX4jaK5Rc.webp";
@@ -191,8 +194,10 @@ function FaqCard({
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Home() {
+
   const [activeCategory, setActiveCategory] = useState<string>(faqCategories[0].id);
   const [searchQuery, setSearchQuery] = useState("");
+  const [, setLocation] = useLocation();
 
   const currentCategory = faqCategories.find((c) => c.id === activeCategory)!;
 
@@ -248,12 +253,17 @@ export default function Home() {
               <span className="text-slate-400 text-xs">
                 Fluxogramas Assistenciais — PET
               </span>
+
+
             </div>
           </div>
-          <div className="hidden sm:flex items-center gap-1 text-xs text-slate-400">
-            <span className="font-medium text-teal-700">{totalItems}</span>
-            <span>fluxogramas</span>
-          </div>
+              <button
+                onClick={() => setLocation ("/Login")}
+                style={{borderRadius:'50px', fontFamily: "'DM Sans', sans-serif"}}
+                className="flex items-center justify-center gap-2 px-5 py-2.5 bg-[#00786f] transition-all duration-200 hover:bg-teal-800 text-white  font-bold text-xs block"
+              >
+                Login
+              </button>
         </div>
       </header>
 
@@ -454,6 +464,12 @@ export default function Home() {
             © 2025 Copyright{" "}
             <span className="font-bold">Desenvolvido pela equipe do GAT-9 PET-Saude Digital</span>. Todos os direitos reservados.
           </p>
+          <div className="hidden sm:flex items-center gap-1 text-xs text-slate-400">
+            <span className="text-gray-500 font-bold">Quantidade de Fluxogramas:</span>
+            <span className="font-medium text-teal-700">{totalItems}</span>
+            <span>fluxogramas</span>
+          </div>
+
         </div>
       </footer>
     </div>

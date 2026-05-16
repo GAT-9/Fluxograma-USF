@@ -1,59 +1,73 @@
 import express from "express";
 import { createServer } from "http";
 import path from "path";
+import cors from "cors";
 import { fileURLToPath } from "url";
-import bcrypt from "bcrypt";
+import mysql from "mysql2"; // Recomendo usar mysql2 para evitar erros de senha
 
+// 1. Configuração ÚNICA do Banco
+const con = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'daiane241103',
+  database: 'db_user'
+});
+
+
+con.connect((err) => {
+  if (err) {
+    console.error("Erro na conexão com MySQL:", err.message);
+    return;
+  }
+  console.log('MySQL conectado com sucesso!');
+});
+
+
+const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+app.use(cors());
+app.use(express.json());
+
 async function startServer() {
-  const app = express();
+  const app = express(); // Usaremos apenas este app
   const server = createServer(app);
 
-  // Determine static files path - try multiple locations for robustness
-  let staticPath: string;
-  
-  // In production (bundled by esbuild), __dirname is dist/
-  // In development, __dirname is root/server/
-  if (process.env.NODE_ENV === "production") {
-    // production: __dirname = dist/, look for dist/public/
-    staticPath = path.resolve(__dirname, "public");
-  } else {
-    // development: __dirname = server/, look for dist/public/
-    staticPath = path.resolve(__dirname, "..", "dist", "public");
-  }
+  // 2. Rota do Banco de Dados (API)
+  // /api para não confundir com o site
+  app.get('/db/usuarios', (req, res) => {
+    con.query('SELECT * FROM USUARIOS', (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      res.json(results);
+    });
+  });
 
-  // Debug logging
-  console.log(`[Server] NODE_ENV: ${process.env.NODE_ENV}`);
-  console.log(`[Server] __dirname: ${__dirname}`);
-  console.log(`[Server] StaticPath: ${staticPath}`);
-
-  // Check if static path exists
-  const { existsSync } = await import("fs");
-  if (!existsSync(staticPath)) {
-    console.error(`[Server] ERROR: Static path does not exist: ${staticPath}`);
-    console.error(`[Server] This usually means the build was not run. Run 'npm run build' first.`);
-  }
+  // 3. Configuração de Arquivos Estáticos (Site)
+  let staticPath = process.env.NODE_ENV === "production" 
+    ? path.resolve(__dirname, "public")
+    : path.resolve(__dirname, "..", "dist", "public");
 
   app.use(express.static(staticPath));
 
-  // Handle client-side routing - serve index.html for all routes
-  app.get("*", (_req, res) => {
+  // 4. Fallback para o site ou erro amigável
+  app.get("*", (req, res) => {
     const indexPath = path.join(staticPath, "index.html");
-    console.log(`[Server] Attempting to serve: ${indexPath}`);
+    
+    // Se o arquivo existe (após o build), ele envia. Se não, avisa.
     res.sendFile(indexPath, (err) => {
       if (err) {
-        console.error(`[Server] Error serving index.html:`, err);
-        res.status(500).send("Error loading application");
+        // Se chegar aqui, é porque você está na porta 3000 mas não fez o build
+        res.status(200).send("<h1>Servidor Ativo!</h1><p>Acesse <a href='/db/usuarios'>/db/usuarios</a> para ver os dados do banco.</p>");
       }
     });
   });
 
-  const port = process.env.PORT || 3000;
-
+  const port = 3000;
   server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+    console.log(`Servidor rodando em http://localhost:${port}/`);
   });
 }
 
