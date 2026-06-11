@@ -3,7 +3,7 @@
 </div>
 <br>
 <br>
-# 📊 Fluxograma USF
+<h2>📊 Fluxograma USF</h2>
 
 Sistema para modelagem, padronização e visualização de fluxos assistenciais em Unidades de Saúde da Família (USF), com foco na qualificação da Atenção Primária à Saúde (APS) no SUS.
 <br>
