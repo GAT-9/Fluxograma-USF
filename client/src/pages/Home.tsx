@@ -28,8 +28,7 @@ import {
 } from "lucide-react";
 import { faqCategories, type FaqCategory, type FaqItem } from "@/lib/faqData";
 
-const HERO_IMAGE =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663479961843/M8AAzhPqVA4ZBQfdHmU4KC/hero-banner-jnKdddSVkMojRqX4jaK5Rc.webp";
+import HERO_IMAGE from '../assets/Usf.png';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   ClipboardList,
@@ -263,7 +262,7 @@ export default function Home() {
       <section className="relative overflow-hidden" style={{ height: "280px" }}>
         <img
           src={HERO_IMAGE}
-          alt="Corredor da unidade de saúde"
+          alt="frente da unidade de saúde"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div
