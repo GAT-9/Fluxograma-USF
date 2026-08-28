@@ -24,6 +24,7 @@ import {
   Hand,
   Cat,
   Shield,
+  FlaskConical,
 } from "lucide-react";
 import { faqCategories, type FaqCategory, type FaqItem } from "@/lib/faqData";
 
@@ -42,6 +43,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Hand,
   Cat,
   Shield,
+  FlaskConical,
 };
 
 const categoryThemeStyles: Record<
