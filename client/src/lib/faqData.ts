@@ -570,9 +570,9 @@ export const faqCategories: FaqCategory[] = [
     label: "Esporotricose",
     description:
       "Identificação, diagnóstico, coleta de material para cultura, classificação clínica, tratamento antifúngico e vigilância epidemiológica da esporotricose humana e sua relação com a transmissão zoonótica felina.",
-    color: "border-amber-500",
-    bgColor: "bg-amber-50 text-amber-700",
-    icon: "Microscope",
+    color: "border-teal-500",
+    bgColor: "bg-teal-50 text-teal-700",
+    icon: "FlaskConical",
     items: [
       {
         id: "esp-01",
@@ -680,9 +680,9 @@ export const faqCategories: FaqCategory[] = [
     label: "Violência Doméstica",
     description:
       "Acolhimento humanizado, identificação do tipo de violência, avaliação de risco, condutas clínicas específicas, notificação compulsória e encaminhamento de mulheres em situação de violência doméstica na Atenção Primária.",
-    color: "border-fuchsia-500",
-    bgColor: "bg-fuchsia-50 text-fuchsia-700",
-    icon: "HeartHandshake",
+    color: "border-rose-500",
+    bgColor: "bg-rose-50 text-rose-700",
+    icon: "ShieldAlert",
     items: [
       {
         id: "vd-01",
