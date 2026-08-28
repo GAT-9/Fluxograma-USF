@@ -56,6 +56,8 @@ const categoryThemeStyles: Record<
   hanseniase: { border: "#ec4899", text: "#be185d", bg: "#fce7f3" },
   toxoplasmose: { border: "#8b5cf6", text: "#6d28d9", bg: "#ede9fe" },
   "ist-hiv": { border: "#ef4444", text: "#b91c1c", bg: "#fee2e2" },
+  esporotricose: { border: "#f59e0b", text: "#b45309", bg: "#fef3c7" },
+  "violencia-domestica": { border: "#d946ef", text: "#a21caf", bg: "#fae8ff" },
 };
 
 // ── Category Tab ──────────────────────────────────────────────────────────────
