@@ -561,4 +561,266 @@ export const faqCategories: FaqCategory[] = [
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────────
+  // ESPOROTRICOSE
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: "esporotricose",
+    label: "Esporotricose",
+    description:
+      "Identificação, diagnóstico, coleta de material para cultura, classificação clínica, tratamento antifúngico e vigilância epidemiológica da esporotricose humana e sua relação com a transmissão zoonótica felina.",
+    color: "border-amber-500",
+    bgColor: "bg-amber-50 text-amber-700",
+    icon: "Microscope",
+    items: [
+      {
+        id: "esp-01",
+        question: "Como recepcionar e triar um paciente com suspeita de esporotricose?",
+        department: "Recepção / Enfermagem",
+        answer:
+          "O paciente pode chegar por identificação do ACS na comunidade ou por demanda espontânea relatando lesões cutâneas sugestivas e histórico de contato com animais ou matéria orgânica contaminada.",
+        steps: [
+          { step: 1, instruction: "ACS identifica caso suspeito e encaminha para atendimento, ou o usuário chega por demanda espontânea na UBS." },
+          { step: 2, instruction: "Usuário relata: lesões cutâneas nodulares ou ulceradas; feridas que não cicatrizam; lesões com secreção ou crostas; nódulos que seguem o trajeto dos vasos linfáticos; histórico de arranhadura/mordedura de gato ou contato nos últimos 6 meses com gato, cão ou outro animal com suspeita/diagnóstico de esporotricose; ou manipulação sem luvas de solo/plantas contaminadas." },
+          { step: 3, instruction: "Recepcionista registra a queixa principal no prontuário/sistema e aciona o médico ou enfermeira conforme disponibilidade da agenda." },
+          { step: 4, instruction: "Enfermeira ou técnica de enfermagem realiza avaliação preliminar: localização e quantidade das lesões, nódulos subcutâneos, secreção/ulceração e presença de linfangite nodular." },
+          { step: 5, instruction: "Verificar histórico epidemiológico dos últimos 6 meses (contato com gatos feridos, arranhaduras/mordidas, manipulação de solo/plantas, animais doentes na residência) e avaliar tempo de evolução e queixas sistêmicas (febre, dor local, mal-estar)." },
+          { step: 6, instruction: "Com suspeita consistente: encaminhar para avaliação médica e realizar notificação semanal. Sem suspeita: orientar o paciente e agendar retorno conforme necessidade." },
+        ],
+        note: "Sinais de gravidade — febre persistente, dispneia, alteração neurológica, lesões disseminadas, acometimento ocular, imunossupressão — indicam prioridade para avaliação médica imediata.",
+      },
+      {
+        id: "esp-02",
+        question: "Como conduzir a consulta clínica e o diagnóstico diferencial da esporotricose?",
+        department: "Médico(a)",
+        answer:
+          "O diagnóstico combina parâmetros epidemiológicos, clínicos e laboratoriais, com exame dermatoneurológico detalhado e diagnóstico diferencial com outras dermatoses granulomatosas.",
+        steps: [
+          { step: 1, instruction: "Realizar anamnese detalhada: início e evolução das lesões, trauma cutâneo prévio, contato com animais doentes e presença de outras doenças ou imunossupressão." },
+          { step: 2, instruction: "Exame dermatoneurológico: avaliar lesões cutâneas (pápulas, nódulos subcutâneos, úlceras, lesões crostosas), o trajeto linfático (forma cutâneo-linfática) e outras regiões corporais." },
+          { step: 3, instruction: "Definir hipótese diagnóstica com base em parâmetros epidemiológicos (trauma com gatos doentes ou não, plantas, subprodutos vegetais ou solo contaminados), clínicos (formas cutânea, mucosa ou extracutânea) e laboratoriais." },
+          { step: 4, instruction: "Se clínica e epidemiologia forem sugestivas: solicitar cultura micológica para isolamento e identificação de Sporothrix spp." },
+          { step: 5, instruction: "Solicitar exames de rotina para seguimento: hemograma, hepatograma e função renal." },
+          { step: 6, instruction: "Realizar diagnóstico diferencial com: leishmaniose tegumentar, tuberculose cutânea, blastomicose sul-americana (Paracoccidioides brasiliensis) e cromoblastomicose (considerar ainda outras viroses, bacterioses, micoses, protozooses, helmintoses e doenças não infecciosas com apresentação semelhante)." },
+        ],
+        note: "Encaminhar para serviço especializado quando houver: formas disseminadas, comprometimento sistêmico, imunossupressão (HIV, transplantados), falha terapêutica ou necessidade de anfotericina B. Encaminhar para infectologia/telerregulação em casos de forma disseminada, forma extracutânea, refratariedade terapêutica, eventos adversos importantes, imunossupressão, gestação, crianças <14 anos, hepatopatia, diabetes descompensado, alcoolismo crônico ou contraindicação ao itraconazol.",
+      },
+      {
+        id: "esp-03",
+        question: "Como coletar o material para cultura (biópsia ou aspirado de lesão)?",
+        department: "Enfermagem / Coleta",
+        answer:
+          "A coleta só é feita na USF quando há disponibilidade de material, seguindo rigorosamente as normas de assepsia, acondicionamento e transporte até o LACEN/BA.",
+        steps: [
+          { step: 1, instruction: "Tecido obtido por biópsia: lavar/higienizar as mãos; usar EPI (luvas estéreis, máscara, touca, óculos, avental); realizar assepsia do local com SF 0,9% e colocar campos estéreis." },
+          { step: 2, instruction: "Coletar fragmento da lesão com instrumento estéril, ou encostar um swab estéril em ângulo de 30° e girar sobre a ferida por alguns segundos para absorver o material." },
+          { step: 3, instruction: "Colocar a amostra em frasco transparente estéril com soro fisiológico 0,9% (embeber completamente). ATENÇÃO: não usar nenhum líquido fixador (formol ou álcool)." },
+          { step: 4, instruction: "Secreção obtida por aspirado de lesão: realizar assepsia e campos estéreis; aspirar com agulha e seringa descartável o conteúdo da lesão cutânea; acondicionar em frasco estéril com pequena quantidade de SF 0,9%." },
+          { step: 5, instruction: "Encaminhar ao Laboratório Central de Saúde Pública Profº Gonçalo Moniz (LACEN/BA), mantendo e transportando as amostras sob refrigeração (2°C a 8°C)." },
+          { step: 6, instruction: "Na esporotricose extracutânea, colher outros materiais conforme o comprometimento clínico: líquido sinovial, escarro, líquor ou sangue." },
+        ],
+        note: "Amostras são rejeitadas em caso de envio em frasco não estéril e sem tampa, envio em seringa, volume menor que 500 µL ou após 48 horas da coleta. O resultado do isolamento e identificação do fungo fica disponível em até 30 dias. O método definitivo de confirmação é o isolamento do fungo em cultura seguido da prova térmica de dimorfismo.",
+      },
+      {
+        id: "esp-04",
+        question: "Como classificar clinicamente o caso confirmado de esporotricose?",
+        department: "Médico(a)",
+        answer:
+          "Após confirmação, o caso é classificado em cutâneo ou extracutâneo, cada um com subtipos e características próprias que orientam a gravidade e o encaminhamento.",
+        steps: [
+          { step: 1, instruction: "Formas cutâneas — linfocutânea (≈60–70% dos casos): forma mais comum, com nódulos e úlceras no local do trauma que se disseminam ao longo dos vasos linfáticos." },
+          { step: 2, instruction: "Cutânea fixa (≈25% dos casos): lesão única e localizada no ponto de inoculação, sem disseminação linfática nem acometimento de órgãos internos." },
+          { step: 3, instruction: "Cutânea disseminada (<5% dos casos): múltiplas lesões cutâneas não contíguas, mais comum em imunossuprimidos (AIDS, etilistas, uso de imunossupressores) ou após contato repetido com gatos infectados." },
+          { step: 4, instruction: "Formas extracutâneas: mucosas (boca, nariz, faringe, laringe); oculares (conjuntivite granulomatosa, dacriocistite, ceratite, uveíte, retinite, esclerite, endoftalmite); osteoarticulares (osteomielite e artrite); pulmonares (tosse persistente, febre, sudorese noturna, perda de peso); neurológicas (meningoencefalite crônica, mais frequente em HIV/AIDS); outras localizações/sepse (linfonodos, medula óssea, sangue, urina)." },
+          { step: 5, instruction: "Registrar o caso como confirmado no prontuário e no SINAN." },
+        ],
+        note: "Caso seja identificado algum animal doente, é importante realizar sua coleta e investigação junto com o caso humano, complementando o diagnóstico e contribuindo para o controle e prevenção do agravo.",
+      },
+      {
+        id: "esp-05",
+        question: "Como conduzir o tratamento antifúngico da esporotricose?",
+        department: "Médico(a) / Farmácia",
+        answer:
+          "O tratamento é iniciado na própria USF, com dispensação vinda da VIEP e acompanhamento mensal, podendo durar de três meses a um ano conforme a resposta clínica.",
+        steps: [
+          { step: 1, instruction: "Itraconazol — Adultos: 200 mg/dia; Crianças: 5 a 10 mg/kg/dia; via oral, 1x/dia após refeição, até 1 mês após o desaparecimento dos sinais clínicos/lesões." },
+          { step: 2, instruction: "Terbinafina — Adultos: 500 mg/dia; Crianças: <20 kg = 62,5 mg; 20–40 kg = 125 mg; >40 kg = 250 mg; via oral, 1x/dia, mesma duração do itraconazol." },
+          { step: 3, instruction: "Solução saturada de iodeto de potássio — iniciar com 5 gotas, aumentando 1 gota/dia (ambas as tomadas) até atingir a dose alvo (adultos 20–25 gotas 2x/dia; crianças conforme peso: <20kg = 10 gotas, 20–40kg = 15 gotas, >40kg = 20–25 gotas); manipular 50g de iodeto de potássio em 35mL de água destilada; tomar após refeições, com suco ou leite, nunca puro." },
+          { step: 4, instruction: "Posaconazol 400 mg (10mL da solução oral), via oral, 2x/dia após refeição — terapia de resgate para casos refratários graves." },
+          { step: 5, instruction: "Anfotericina B — complexo lipídico 5 mg/kg/dia ou lipossomal 3 mg/kg/dia, via intravenosa, 1x/dia, até resposta clínica (em torno de 10 a 14 dias); substituir por itraconazol assim que possível." },
+          { step: 6, instruction: "Duração total do tratamento: de três a seis meses, podendo se estender até um ano de acordo com a resposta clínica. Início do tratamento na própria USF e acompanhamento MENSAL pela equipe de saúde da família." },
+        ],
+        note: "Em casos especiais (adultos ou crianças que não conseguem deglutir cápsulas), o itraconazol pode ser aberto e dissolvido em sucos cítricos ou xarope. Orientar durante o tratamento: não interromper antes da orientação médica; comparecer às consultas de acompanhamento; manter higiene das lesões (limpeza com água e sabão, mantê-las cobertas quando necessário, evitar manipulação); evitar contato direto com secreções e usar luvas ao manipular feridas; e, quanto aos animais, evitar contato com gatos doentes, encaminhá-los para avaliação veterinária e mantê-los isolados até o tratamento.",
+      },
+      {
+        id: "esp-06",
+        question: "Como realizar a notificação, o acompanhamento mensal, o encerramento do caso e as medidas de prevenção?",
+        department: "Enfermeira / Equipe de Saúde",
+        answer:
+          "A vigilância inclui notificação no SINAN, busca ativa de casos humanos e animais, acompanhamento mensal da resposta ao tratamento e orientações de prevenção e controle ambiental.",
+        steps: [
+          { step: 1, instruction: "Notificar o caso no SINAN (enfermeira) e informar a Vigilância Epidemiológica Municipal para fornecimento de medicamentos." },
+          { step: 2, instruction: "Organizar o acompanhamento mensal e o controle de doses supervisionadas; realizar busca ativa de casos humanos e animais na região de ocorrência, com colaboração dos ACE e ACS; investigar gatos com feridas, animais com secreção nasal/cutânea e surtos locais; realizar visita domiciliar quando necessário." },
+          { step: 3, instruction: "Acompanhamento mensal: avaliar regressão das lesões, surgimento de novas lesões, adesão ao tratamento, efeitos adversos e sinais de hepatotoxicidade. Observar clinicamente redução de nódulos, cicatrização das úlceras e ausência de novas lesões." },
+          { step: 4, instruction: "Sem melhora: reavaliar diagnóstico, ajustar dose ou trocar medicamento e encaminhar para serviço especializado." },
+          { step: 5, instruction: "Encerramento do caso: cura definida pelo desaparecimento completo das lesões (reepitelização, ausência de infiltração local, de crosta e de hiperemia) e tratamento mantido por pelo menos 1 mês após a cura clínica. Avaliar possíveis incapacidades/sequelas, registrar cura no prontuário, encerrar no SINAN e programar reavaliações pós-alta." },
+          { step: 6, instruction: "Orientações de prevenção e controle: limpeza periódica de quintais; remoção de restos de materiais de construção e detritos orgânicos em decomposição; uso de hipoclorito de sódio na limpeza de superfícies manipuladas pelo animal doente; destinação correta de carcaças de animais infectados (saco branco leitoso com símbolo de risco biológico, sob refrigeração até incineração); controle reprodutivo (castração); diagnóstico precoce; tratamento correto e isolamento apropriado." },
+        ],
+        note: "Uso de EPIs (luvas descartáveis de látex, avental descartável de mangas compridas, máscara N95/PFF2 e óculos de segurança) durante atividades de alto risco com animais. Após manipular o animal e retirar as luvas, lavar mãos e antebraços com sabão. A eutanásia pode ser indicada para animais com lesões extensas e sem possibilidade terapêutica.",
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // VIOLÊNCIA DOMÉSTICA
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: "violencia-domestica",
+    label: "Violência Doméstica",
+    description:
+      "Acolhimento humanizado, identificação do tipo de violência, avaliação de risco, condutas clínicas específicas, notificação compulsória e encaminhamento de mulheres em situação de violência doméstica na Atenção Primária.",
+    color: "border-fuchsia-500",
+    bgColor: "bg-fuchsia-50 text-fuchsia-700",
+    icon: "HeartHandshake",
+    items: [
+      {
+        id: "vd-01",
+        question: "Como acolher inicialmente uma mulher em situação de violência doméstica?",
+        department: "Recepção / Enfermeira",
+        answer:
+          "O primeiro contato deve garantir privacidade e sigilo desde a recepção, direcionando a usuária para a triagem e classificação de risco pela enfermeira.",
+        steps: [
+          { step: 1, instruction: "Usuária chega à recepção relatando violência doméstica, é encaminhada por outro serviço da rede ou pelo ACS, ou chega com suspeita de violência." },
+          { step: 2, instruction: "Recepção realiza acolhimento inicial garantindo privacidade, confidencialidade, empatia, escuta qualificada, atenta e livre de julgamentos." },
+          { step: 3, instruction: "Direcionar a usuária para a triagem, onde será feita a classificação de risco e o acolhimento pela enfermeira." },
+        ],
+        note: "Garantir que a mulher esteja sozinha (sem acompanhantes ou crianças acima de 2 anos) para que se sinta mais confortável para falar sobre a violência.",
+      },
+      {
+        id: "vd-02",
+        question: "Como identificar o tipo de violência e avaliar o risco na triagem?",
+        department: "Enfermeira",
+        answer:
+          "A enfermeira deve usar perguntas assertivas — diretas ou indiretas conforme o caso — para identificar a violência, avaliar o risco de vida e informar o plano de segurança.",
+        steps: [
+          { step: 1, instruction: "Se a usuária relata violência: proceder ao atendimento para identificar o tipo sofrido. Se encaminhada por outro serviço: confirmar se a notificação no SINAN já foi realizada." },
+          { step: 2, instruction: "Se a usuária nega violência: atentar para sinais de alerta; se presentes, proceder à identificação do tipo de violência." },
+          { step: 3, instruction: "Usar perguntas assertivas diretas (se há queixa de violência) e indiretas (se há apenas suspeita), por exemplo: \"Você já sentiu medo de alguém em casa?\" ou \"Você já foi agredida fisicamente ou por palavras em casa por alguém da família?\"." },
+          { step: 4, instruction: "Avaliar a história da violência, o relacionamento com o agressor, a possibilidade de risco de vida, o nível de motivação para lidar com a situação, limitações, possibilidades pessoais e recursos sociais/familiares." },
+          { step: 5, instruction: "Avaliação de risco: definir se é situação de urgência ou se pode aguardar atendimento agendado; avaliar risco de suicídio, feminicídio, homicídio ou violência contra crianças." },
+          { step: 6, instruction: "Registrar detalhadamente a data da ocorrência e todos os achados clínicos e emocionais da usuária, com destaque para o(s) tipo(s) de violência sofrido(s)." },
+          { step: 7, instruction: "Oferecer testes rápidos para IST's (HIV, sífilis e hepatites B e C), com aconselhamento pré e pós-teste." },
+          { step: 8, instruction: "Informar o plano de segurança para a vítima." },
+        ],
+        note: "Plano de segurança: identificar vizinhos de confiança para pedir ajuda; garantir que, se a briga for inevitável, seja em local sem armas; planejar como fugir de casa e para onde ir; deixar em local seguro cópias de documentos, dinheiro, roupas e cópia da chave de casa; combinar um código de comunicação de emergência com uma vizinha de confiança; nunca discutir na cozinha ou em local com armas ou facas.",
+      },
+      {
+        id: "vd-03",
+        question: "Quais sinais observar e como conduzir a consulta odontológica?",
+        department: "Odontologia",
+        answer:
+          "A consulta odontológica é uma porta de entrada importante para identificar sinais físicos e comportamentais de violência, especialmente lesões em cabeça, pescoço e região intraoral.",
+        steps: [
+          { step: 1, instruction: "Identificar sinais físicos sugestivos de violência: lesões em cabeça e pescoço, hematomas, fraturas, marcas de mordida e traumas intraorais (lesões em lábios, gengivas e palato)." },
+          { step: 2, instruction: "Observar sinais comportamentais e emocionais: ansiedade, depressão, isolamento social, medo, insegurança ou mudanças repentinas de comportamento." },
+          { step: 3, instruction: "Investigar a possibilidade de diferentes formas de violência: física, psicológica/emocional, sexual, negligência e importunação sexual." },
+          { step: 4, instruction: "Realizar acolhimento com escuta qualificada, empatia e sigilo; oferecer assistência clínica de acordo com as necessidades identificadas e prestar apoio emocional." },
+          { step: 5, instruction: "Orientar sobre direitos e serviços da rede de proteção; articular o cuidado com a equipe multiprofissional e a Estratégia Saúde da Família; encaminhar para serviços especializados quando necessário." },
+          { step: 6, instruction: "Realizar a notificação compulsória dos casos suspeitos ou confirmados, conforme a legislação vigente." },
+        ],
+      },
+      {
+        id: "vd-04",
+        question: "Como conduzir a consulta clínica conforme o tipo de violência (física, psicológica, patrimonial)?",
+        department: "Médico(a) / Enfermeira",
+        answer:
+          "Após identificar o tipo de violência, a consulta clínica deve registrar detalhadamente os achados, notificar em até 24h e seguir condutas específicas para cada tipo de violência.",
+        steps: [
+          { step: 1, instruction: "Explicar à paciente todos os procedimentos que serão realizados, para que não sejam percebidos como agressão. Autorizar a presença de acompanhante se a paciente concordar." },
+          { step: 2, instruction: "Realizar exame clínico com ênfase nas queixas e nas lesões; registrar no prontuário o tipo de lesão, quem foi o agressor, quando/onde/como aconteceu e outros dados significativos." },
+          { step: 3, instruction: "Preencher e dar andamento às 2 vias da ficha de notificação de violência em até 24 horas: uma via ao prontuário, outra ao SINAN." },
+          { step: 4, instruction: "Orientar sobre a importância do Boletim de Ocorrência; se a usuária não desejar registrá-lo, sua vontade deve ser respeitada, orientando-a sobre seus direitos." },
+          { step: 5, instruction: "Violência física: exame físico completo com descrição detalhada das lesões (tipo, localização, tamanho, evolução), registro em mapa corporal, verificação de compatibilidade com o relato, investigação de lesões em diferentes estágios, avaliação de sinais de gravidade (TCE, sangramentos, déficit neurológico), manejo clínico imediato e encaminhamento ao HRSAJ em casos graves; orientar sobre registro no IML e exame pericial." },
+          { step: 6, instruction: "Violência psicológica: avaliar estado mental (humor, pensamento, comportamento, afetividade), identificar sofrimento psíquico e risco de suicídio, avaliar medo/culpa/baixa autoestima/dependência emocional e grau de isolamento social; elaborar plano de segurança emocional e encaminhar para psicologia e/ou CAPS." },
+          { step: 7, instruction: "Violência patrimonial: investigar controle financeiro exercido pelo agressor, retenção de documentos/bens, impedimento de trabalhar/estudar e dependência econômica; encaminhar para assistência social, CRAS, CREAS e Defensoria Pública." },
+        ],
+        note: "Reforçar sempre: a violência é crime, com respaldo na Lei Maria da Penha; o registro do B.O. é um direito, não uma obrigação; a decisão de denunciar ou não o agressor será respeitada.",
+      },
+      {
+        id: "vd-05",
+        question: "Qual a conduta no atendimento à violência sexual dentro das primeiras 72 horas?",
+        department: "Médico(a) / Enfermeira",
+        answer:
+          "O atendimento à violência sexual é realizado por médico acompanhado de enfermeiro, com foco em contracepção de emergência, profilaxias, coleta de vestígios e encaminhamento ao IML.",
+        steps: [
+          { step: 1, instruction: "Explicar a importância do exame físico e a possibilidade de coleta de material no IML, detalhando os procedimentos e locais do corpo a serem tocados. Havendo recusa, a decisão e autonomia da paciente devem ser respeitadas." },
+          { step: 2, instruction: "Registrar a anamnese: uso de drogas, local e hora aproximada do crime, e o que a vítima fez depois (banhou-se, lavou a área genital, fez ducha vaginal, removeu/inseriu algo na vagina, mudou de roupa ou tomou algum medicamento)." },
+          { step: 3, instruction: "Realizar exame físico completo, descrevendo as lesões em localização, tamanho, número e forma, preferencialmente no sentido craniocaudal, incluindo lesões genitais e extragenitais." },
+          { step: 4, instruction: "Se ocorreu até 72 horas: realizar anticoncepção de emergência nas usuárias sem contraceptivo eficaz ou quando não for possível avaliar o método em uso (levonorgestrel 1,5mg dose única, ou 0,75mg de 12/12h — total 2 comprimidos — ou opções de anticoncepcional combinado). Usar antieméticos em caso de vômito; repetir a dose se o vômito ocorrer nas primeiras 2 horas após a ingestão." },
+          { step: 5, instruction: "Iniciar profilaxia das IST/AIDS, Hepatite B e de gravidez (quando necessário); solicitar β-hCG, sorologias (Anti-HIV, Hepatite B — HbsAg e anti-Hbs —, Hepatite C — anti-HCV —, VDRL), hemograma, TGO, TGP, bilirrubinas, ureia e creatinina." },
+          { step: 6, instruction: "Orientar a não higienizar nem remover roupas ou secreções antes do exame pericial, salvo ameaça de vida; encaminhar ao Instituto Médico Legal para coleta de vestígios; agendar consulta de retorno." },
+        ],
+        note: "A anticoncepção de emergência é encaminhada ao Centro de Testagem e Aconselhamento (CTA), que funciona de segunda a quinta-feira. Se ocorreu com mais de 72 horas ou em casos crônicos: solicitar exames laboratoriais, avaliar atraso menstrual, ofertar preservativos e agendar retorno; em caso de urgência, encaminhar ao Hospital Regional de Santo Antônio de Jesus.",
+      },
+      {
+        id: "vd-06",
+        question: "Como organizar o seguimento laboratorial nas consultas médica e de retorno?",
+        department: "Médico(a) / Ginecologia",
+        answer:
+          "O seguimento clínico-ginecológico deve estar disponível desde o primeiro atendimento, com um cronograma de exames que considera sempre a data da agressão (ou da última, em casos crônicos).",
+        steps: [
+          { step: 1, instruction: "No primeiro atendimento, realizar exame clínico e ginecológico minucioso, incluindo verificação de lesões, corrimentos, quadros sugestivos de IST e amenorreia compatível com gravidez." },
+          { step: 2, instruction: "Solicitar sempre o β-hCG no primeiro atendimento, mesmo em usuárias com ciclo menstrual regular, além de VDRL (sífilis), Anti-HIV, HbsAg/anti-Hbs (Hepatite B), Anti-HCV (Hepatite C) e pesquisa de gonococo/tricomonas/clamídia." },
+          { step: 3, instruction: "Cronograma pós-agressão: 30 dias → β-hCG (gravidez); 6 semanas → VDRL e Anti-HIV; 3 meses → VDRL, Anti-HIV e HbsAg; 6 meses → Anti-HIV e Anti-HCV." },
+          { step: 4, instruction: "Fazer manejo clínico sindrômico das ISTs conforme resultados dos exames e protocolos ministeriais." },
+          { step: 5, instruction: "Encorajar a realização da denúncia policial, caso ainda não tenha sido feita, explicando sua importância especialmente diante da possibilidade de gravidez e opção pelo aborto; oferecer o endereço da Delegacia da Mulher." },
+          { step: 6, instruction: "Agendar consulta de retorno e as consultas de acompanhamento com os resultados dos exames indicados para cada época." },
+        ],
+        note: "Para todos os casos, mesmo assintomáticos e/ou com exames negativos no primeiro atendimento, devem ser solicitados os exames de gravidez, sífilis, HIV e hepatites B/C nas consultas de acompanhamento previamente agendadas.",
+      },
+      {
+        id: "vd-07",
+        question: "Como conduzir os casos de gravidez decorrente de violência sexual?",
+        department: "Médico(a) / Serviço Social",
+        answer:
+          "Confirmada a gravidez, a usuária deve ser esclarecida sobre as três possibilidades legais existentes, com pleno respeito à sua autonomia e sigilo.",
+        steps: [
+          { step: 1, instruction: "Desejo de continuar a gravidez e permanecer com o filho: seguir pré-natal na Unidade de Saúde." },
+          { step: 2, instruction: "Desejo de continuar a gravidez e dar a criança para adoção: pré-natal na Unidade de Saúde e encaminhamento à 2ª Vara da Infância e da Juventude para o processo de adoção legal." },
+          { step: 3, instruction: "Desejo de realizar a interrupção da gravidez (aborto): encaminhar imediatamente a mulher para o Hospital Maternidade Luiz Argolo (referência para Interrupção Legal da Gestação — ILG), onde a solicitação será avaliada do ponto de vista técnico." },
+        ],
+        note: "O aborto legal é garantido pela lei de forma gratuita, sigilosa e sem necessidade de autorização judicial ou registro de Boletim de Ocorrência, bastando o relato da paciente e o registro em prontuário da agressão, da data da ocorrência e dos achados clínicos e emocionais. No caso de entrega para adoção, há acompanhamento e audiência pós-parto para confirmação da decisão, com prazo de arrependimento de até 10 dias corridos; não há obrigatoriedade de informar o pai da criança nem possibilidade de escolha dos adotantes; o sigilo total é garantido, inclusive em relação à família.",
+      },
+      {
+        id: "vd-08",
+        question: "Quais encaminhamentos à rede intersetorial e condutas subsequentes devem ser garantidos?",
+        department: "Equipe Multiprofissional",
+        answer:
+          "O cuidado à mulher em situação de violência exige articulação contínua com a rede de proteção e acompanhamento longitudinal pela USF, com monitoramento permanente do risco.",
+        steps: [
+          { step: 1, instruction: "Encaminhar para atendimento psicológico individual e/ou familiar e para assistência social, com avaliação de vulnerabilidade." },
+          { step: 2, instruction: "Articular com o CRAS (apoio social e acesso a benefícios), o CREAS (casos de maior complexidade e violação de direitos) e a Defensoria Pública (orientação jurídica e acesso à justiça)." },
+          { step: 3, instruction: "Orientar e, se a usuária desejar, encaminhar para a Delegacia Especializada de Atendimento à Mulher (DEAM) para registro da ocorrência e solicitação de medidas protetivas. Acionar o Conselho Tutelar quando houver crianças ou adolescentes em risco." },
+          { step: 4, instruction: "Garantir acompanhamento longitudinal na UBS/USF: visita domiciliar, consultas de retorno para reavaliação clínica/emocional/social, monitoramento contínuo do risco de revitimização, feminicídio e suicídio, e atualização do plano de segurança em cada atendimento." },
+          { step: 5, instruction: "Realizar e acompanhar a notificação compulsória no SINAN; promover acompanhamento multiprofissional (enfermagem, medicina, psicologia, serviço social e e-Multi); fortalecer a autonomia e o protagonismo da usuária no cuidado." },
+        ],
+        note: "Encaminhar imediatamente para hospital de referência em casos de lesões graves, risco de morte ou violência sexual recente.",
+      },
+      {
+        id: "vd-09",
+        question: "Quais orientações principais devem ser dadas à usuária em todos os atendimentos?",
+        department: "Equipe de Saúde",
+        answer:
+          "Informar direitos, desmistificar a obrigatoriedade do B.O. e fornecer canais de ajuda são orientações que devem ser reforçadas continuamente, respeitando sempre a autonomia da usuária.",
+        steps: [
+          { step: 1, instruction: "Informar que a violência é crime, com respaldo legal na Lei Maria da Penha, e esclarecer os diferentes tipos de violência (física, psicológica, sexual, patrimonial e moral)." },
+          { step: 2, instruction: "Orientar sobre o direito às medidas protetivas de urgência; informar que o registro do Boletim de Ocorrência é um direito, não uma obrigação; reforçar que a decisão de denunciar ou não o agressor será respeitada." },
+          { step: 3, instruction: "Orientar sobre os serviços disponíveis na rede de apoio (saúde, assistência social e jurídico) e incentivar a construção de uma rede de apoio pessoal (familiares, amigos, serviços)." },
+          { step: 4, instruction: "Informar os canais de ajuda: Disque 180 (Central de Atendimento à Mulher) e Disque 190 (situações de emergência)." },
+          { step: 5, instruction: "Discutir estratégias práticas de plano de segurança (documentos e itens essenciais acessíveis, local seguro para se abrigar, contatos de emergência) e reforçar a importância do retorno ao serviço de saúde." },
+        ],
+      },
+    ],
+  },
 ];
