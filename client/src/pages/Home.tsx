@@ -26,7 +26,9 @@ import {
   Shield,
   FlaskConical,
 } from "lucide-react";
+import { FluxogramaMermaid } from "@/components/FluxogramaMermaid";
 import { faqCategories, type FaqCategory, type FaqItem } from "@/lib/faqData";
+import { createFaqFlowchart } from "@/lib/mermaid";
 
 import HERO_IMAGE from '../assets/Usf.png';
 
@@ -126,6 +128,7 @@ function FaqCard({
   badgeClass: string;
 }) {
   const [open, setOpen] = useState(false);
+  const flowchart = useMemo(() => createFaqFlowchart(item), [item]);
 
   return (
     <motion.div
@@ -175,6 +178,18 @@ function FaqCard({
           >
             <div className="px-5 pb-5 border-t border-slate-100 pt-4">
               <p className="text-slate-600 text-sm leading-relaxed">{item.answer}</p>
+              <div className="mt-5">
+                <p
+                  className="mb-2 text-xs font-bold uppercase tracking-wider text-teal-700"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Fluxograma visual
+                </p>
+                <FluxogramaMermaid
+                  chart={flowchart}
+                  ariaLabel={`Fluxograma: ${item.question}`}
+                />
+              </div>
               {item.steps && <StepList steps={item.steps} />}
               {item.note && (
                 <div className="mt-4 flex gap-2.5 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
