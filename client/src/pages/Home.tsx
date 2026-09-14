@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { FluxogramaMermaid } from "@/components/FluxogramaMermaid";
 import { faqCategories, type FaqCategory, type FaqItem } from "@/lib/faqData";
-import { createFaqFlowchart } from "@/lib/mermaid";
+import { stepsToMermaid } from "@/lib/mermaid";
 
 import HERO_IMAGE from '../assets/Usf.png';
 
@@ -128,7 +128,7 @@ function FaqCard({
   badgeClass: string;
 }) {
   const [open, setOpen] = useState(false);
-  const flowchart = useMemo(() => createFaqFlowchart(item), [item]);
+  const flowchart = useMemo(() => stepsToMermaid(item), [item]);
 
   return (
     <motion.div

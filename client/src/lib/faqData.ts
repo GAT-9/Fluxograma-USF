@@ -18,6 +18,33 @@ export interface FaqItem {
   note?: string;
 }
 
+export type FaqFlowTarget =
+  | number
+  | "end"
+  | "undocumented"
+  | `decision:${string}`
+  | `action:${string}`;
+
+export interface FaqFlowAction {
+  id: string;
+  label: string;
+  to: FaqFlowTarget;
+}
+
+export interface FaqFlowDecision {
+  id: string;
+  after?: number | "start";
+  question: string;
+  choices: { label: string; to: FaqFlowTarget }[];
+}
+
+export interface FaqFlowConfig {
+  decisions: FaqFlowDecision[];
+  actions?: FaqFlowAction[];
+  omittedSteps?: number[];
+  transitions?: Partial<Record<number, FaqFlowTarget>>;
+}
+
 export interface FaqCategory {
   id: string;
   label: string;
@@ -824,3 +851,180 @@ export const faqCategories: FaqCategory[] = [
     ],
   },
 ];
+
+// Decisões explícitas extraídas dos próprios passos. Fluxos sem entrada aqui são
+// realmente sequenciais ou não possuem no texto uma conduta diferente por escolha.
+export const faqFlowConfigs: Record<string, FaqFlowConfig> = {
+  "tb-03": {
+    decisions: [{ id: "gravidade", after: 4, question: "Há sinais de gravidade?", choices: [{ label: "Sim", to: 5 }, { label: "Não", to: 6 }] }],
+    transitions: { 5: "end", 6: "end" },
+  },
+  "tb-04": {
+    decisions: [{ id: "suspeita", after: 2, question: "Há suspeita de TB ativa?", choices: [{ label: "Sim", to: 3 }, { label: "Não", to: "undocumented" }] }],
+  },
+  "tb-05": {
+    decisions: [{ id: "amostra", after: 3, question: "Qual amostra será coletada?", choices: [{ label: "1ª amostra", to: "action:primeira-amostra" }, { label: "2ª amostra", to: "action:segunda-amostra" }] }],
+    actions: [
+      { id: "primeira-amostra", label: "Coletar preferencialmente ao despertar", to: 5 },
+      { id: "segunda-amostra", label: "Coletar no mesmo horário, no dia seguinte", to: 5 },
+    ],
+    omittedSteps: [4],
+    transitions: { 3: "decision:amostra" },
+  },
+  "tb-06": {
+    decisions: [
+      { id: "resultado", after: "start", question: "O resultado confirma tuberculose?", choices: [{ label: "Sim", to: 1 }, { label: "Não", to: 5 }] },
+      { id: "exame-externo", question: "É necessário exame de imagem ou cultura fora da unidade?", choices: [{ label: "Sim", to: 6 }, { label: "Não", to: "decision:gravidade" }] },
+      { id: "gravidade", question: "O caso é grave ou apresenta complicações?", choices: [{ label: "Sim", to: 7 }, { label: "Não", to: "end" }] },
+    ],
+    transitions: { 4: "decision:exame-externo", 5: "decision:exame-externo", 6: "decision:gravidade", 7: "end" },
+  },
+  "cv-02": {
+    decisions: [{ id: "gravidade", after: 4, question: "Há sinais de gravidade?", choices: [{ label: "Sim", to: 5 }, { label: "Não", to: 6 }] }],
+    transitions: { 5: 7, 6: 7 },
+  },
+  "cv-03": {
+    decisions: [{ id: "classificacao", after: 3, question: "Qual é a classificação do caso?", choices: [{ label: "Leve", to: 4 }, { label: "Moderado", to: 5 }, { label: "Grave", to: 5 }] }],
+    transitions: { 4: "end", 5: "end" },
+  },
+  "cv-05": {
+    decisions: [
+      { id: "piora", after: 4, question: "Houve piora clínica?", choices: [{ label: "Sim", to: 5 }, { label: "Não", to: "decision:alta" }] },
+      { id: "alta", question: "Os critérios de alta foram atingidos?", choices: [{ label: "Sim", to: 6 }, { label: "Não", to: 4 }] },
+    ],
+    transitions: { 5: "end", 6: "end" },
+  },
+  "arb-02": {
+    decisions: [{ id: "grupo", after: "start", question: "Qual é o grupo de risco?", choices: [{ label: "Grupo A", to: 1 }, { label: "Grupo B", to: 2 }, { label: "Grupo C", to: 3 }, { label: "Grupo D", to: 4 }] }],
+    transitions: { 1: "end", 2: "end", 3: "end", 4: "end" },
+  },
+  "arb-03": {
+    decisions: [{ id: "grupo", after: 2, question: "Em qual grupo o caso foi classificado?", choices: [{ label: "Grupo A", to: 3 }, { label: "Grupo B", to: 4 }, { label: "Grupo C", to: 5 }, { label: "Grupo D", to: 5 }] }],
+    transitions: { 3: "end", 4: "end", 5: "end" },
+  },
+  "arb-04": {
+    decisions: [
+      { id: "chikungunya", after: 4, question: "É caso de chikungunya?", choices: [{ label: "Sim", to: 5 }, { label: "Não", to: "decision:gestante" }] },
+      { id: "gestante", question: "A paciente é gestante?", choices: [{ label: "Sim", to: 6 }, { label: "Não", to: "end" }] },
+    ],
+    transitions: { 5: "decision:gestante", 6: "end" },
+  },
+  "arb-05": {
+    decisions: [
+      { id: "agravamento", after: 5, question: "Houve agravamento?", choices: [{ label: "Sim", to: 6 }, { label: "Não", to: "decision:recuperacao" }] },
+      { id: "recuperacao", question: "Há recuperação clínica?", choices: [{ label: "Sim", to: 7 }, { label: "Não", to: 4 }] },
+    ],
+    transitions: { 6: "end", 7: "end" },
+  },
+  "han-01": {
+    decisions: [{ id: "suspeita", after: 4, question: "Há suspeita consistente de hanseníase?", choices: [{ label: "Sim", to: 5 }, { label: "Não", to: 6 }] }],
+    transitions: { 5: "end", 6: "end" },
+  },
+  "han-02": {
+    decisions: [
+      { id: "confirmacao", after: 5, question: "A suspeita foi confirmada?", choices: [{ label: "Sim", to: 6 }, { label: "Não", to: "undocumented" }] },
+      { id: "classificacao", after: 6, question: "Qual é a classificação operacional?", choices: [{ label: "Paucibacilar (PB)", to: "action:paucibacilar" }, { label: "Multibacilar (MB)", to: "action:multibacilar" }] },
+    ],
+    actions: [
+      { id: "paucibacilar", label: "Classificar como PB: até 5 lesões e poucos nervos acometidos", to: 8 },
+      { id: "multibacilar", label: "Classificar como MB: mais de 5 lesões ou múltiplos nervos acometidos", to: 8 },
+    ],
+    omittedSteps: [7],
+    transitions: { 6: "decision:classificacao" },
+  },
+  "han-03": {
+    decisions: [{ id: "classificacao", after: "start", question: "Qual é a classificação operacional?", choices: [{ label: "Paucibacilar (PB)", to: 1 }, { label: "Multibacilar (MB)", to: 2 }] }],
+    transitions: { 1: 3, 2: 3 },
+  },
+  "han-04": {
+    decisions: [{ id: "alta", after: 5, question: "Completou a PQT e cessaram os sinais de atividade?", choices: [{ label: "Sim", to: 6 }, { label: "Não", to: "undocumented" }] }],
+  },
+  "tox-02": {
+    decisions: [
+      { id: "sorologia", after: "start", question: "Qual é o resultado sorológico?", choices: [{ label: "IgG− / IgM−", to: 1 }, { label: "IgG+ / IgM−", to: 2 }, { label: "IgM+ com ou sem IgG", to: 3 }] },
+      { id: "avidez", after: 3, question: "Qual é a avidez do IgG?", choices: [{ label: "Alta", to: 4 }, { label: "Baixa", to: 5 }] },
+    ],
+    transitions: { 1: "end", 2: "end", 4: "end", 5: "end" },
+  },
+  "tox-01": {
+    decisions: [{ id: "inicio-prenatal", after: 2, question: "A gestante está no início do pré-natal?", choices: [{ label: "Sim", to: 3 }, { label: "Não", to: "undocumented" }] }],
+  },
+  "tox-03": {
+    decisions: [{ id: "pcr", after: 5, question: "O PCR no líquido amniótico foi indicado?", choices: [{ label: "Sim", to: "action:pcr" }, { label: "Não", to: 6 }] }],
+    actions: [{ id: "pcr", label: "Realizar PCR para Toxoplasma gondii no líquido amniótico", to: 6 }],
+  },
+  "tox-04": {
+    decisions: [{ id: "apoio", after: 6, question: "Há necessidade de apoio psicológico ou social?", choices: [{ label: "Sim", to: 7 }, { label: "Não", to: "end" }] }],
+  },
+  "tox-05": {
+    decisions: [{ id: "congenita", after: 4, question: "Há sinais de infecção congênita?", choices: [{ label: "Sim", to: 5 }, { label: "Não", to: 6 }] }],
+    transitions: { 5: 6 },
+  },
+  "hiv-02": {
+    decisions: [{ id: "resultado", after: 3, question: "Qual foi o resultado do teste?", choices: [{ label: "Não reagente", to: 4 }, { label: "Reagente", to: 5 }] }],
+    transitions: { 4: "end", 5: "end" },
+  },
+  "esp-01": {
+    decisions: [
+      { id: "gravidade", after: 5, question: "Há sinal de gravidade?", choices: [{ label: "Sim", to: "action:avaliacao-imediata" }, { label: "Não", to: "decision:suspeita" }] },
+      { id: "suspeita", question: "Há suspeita consistente?", choices: [{ label: "Sim", to: "action:suspeita-consistente" }, { label: "Não", to: "action:sem-suspeita" }] },
+    ],
+    actions: [
+      { id: "avaliacao-imediata", label: "Priorizar avaliação médica imediata", to: "end" },
+      { id: "suspeita-consistente", label: "Encaminhar para avaliação médica e notificar semanalmente", to: "end" },
+      { id: "sem-suspeita", label: "Orientar e agendar retorno conforme necessidade", to: "end" },
+    ],
+  },
+  "esp-02": {
+    decisions: [{ id: "sugestivo", after: 3, question: "Clínica e epidemiologia são sugestivas?", choices: [{ label: "Sim", to: 4 }, { label: "Não", to: 5 }] }],
+  },
+  "esp-03": {
+    decisions: [
+      { id: "material", after: "start", question: "Qual é o tipo de material?", choices: [{ label: "Tecido, biópsia ou swab", to: 1 }, { label: "Aspirado", to: 4 }] },
+      { id: "extracutanea", after: 5, question: "É esporotricose extracutânea?", choices: [{ label: "Sim", to: 6 }, { label: "Não", to: "end" }] },
+    ],
+    transitions: { 3: 5, 4: 5, 6: "end" },
+  },
+  "esp-04": {
+    decisions: [{ id: "forma", after: "start", question: "Qual é a forma clínica?", choices: [{ label: "Linfocutânea", to: 1 }, { label: "Cutânea fixa", to: 2 }, { label: "Cutânea disseminada", to: 3 }, { label: "Extracutânea", to: 4 }] }],
+    transitions: { 1: 5, 2: 5, 3: 5, 4: 5 },
+  },
+  "esp-06": {
+    decisions: [
+      { id: "melhora", after: 3, question: "Há melhora clínica?", choices: [{ label: "Sim", to: "decision:cura" }, { label: "Não", to: 4 }] },
+      { id: "cura", question: "Os critérios de cura foram atingidos?", choices: [{ label: "Sim", to: 5 }, { label: "Não", to: 3 }] },
+    ],
+    transitions: { 4: "end" },
+  },
+  "vd-02": {
+    decisions: [
+      { id: "relato", after: "start", question: "A usuária relata violência?", choices: [{ label: "Sim", to: 1 }, { label: "Não", to: "decision:sinais" }] },
+      { id: "sinais", question: "Há sinais de alerta?", choices: [{ label: "Sim", to: 2 }, { label: "Não", to: "undocumented" }] },
+      { id: "urgencia", after: 4, question: "É uma situação de urgência?", choices: [{ label: "Sim", to: 5 }, { label: "Não", to: 5 }] },
+    ],
+    transitions: { 1: 3, 2: 3 },
+  },
+  "vd-04": {
+    decisions: [
+      { id: "bo", after: 3, question: "A usuária deseja registrar boletim de ocorrência?", choices: [{ label: "Sim", to: 4 }, { label: "Não", to: "decision:tipo" }] },
+      { id: "tipo", question: "Qual é o tipo de violência?", choices: [{ label: "Física", to: 5 }, { label: "Psicológica", to: 6 }, { label: "Patrimonial", to: 7 }] },
+    ],
+    transitions: { 4: "decision:tipo", 5: "end", 6: "end", 7: "end" },
+  },
+  "vd-05": {
+    decisions: [
+      { id: "aceite", after: 1, question: "A paciente aceita o exame e a coleta?", choices: [{ label: "Sim", to: 2 }, { label: "Não", to: "undocumented" }] },
+      { id: "prazo", after: 3, question: "A violência ocorreu em até 72 horas?", choices: [{ label: "Sim", to: 4 }, { label: "Não", to: 5 }] },
+    ],
+  },
+  "vd-07": {
+    decisions: [{ id: "desejo", after: "start", question: "Qual é o desejo da usuária?", choices: [{ label: "Continuar e permanecer com o filho", to: 1 }, { label: "Continuar e entregar para adoção", to: 2 }, { label: "Interromper a gravidez", to: 3 }] }],
+    transitions: { 1: "end", 2: "end", 3: "end" },
+  },
+  "vd-08": {
+    decisions: [
+      { id: "emergencia", after: "start", question: "Há lesão grave, risco de morte ou violência sexual recente?", choices: [{ label: "Sim", to: "end" }, { label: "Não", to: 1 }] },
+      { id: "deam", after: 2, question: "A usuária deseja encaminhamento à DEAM?", choices: [{ label: "Sim", to: 3 }, { label: "Não", to: 4 }] },
+    ],
+  },
+};

@@ -1,5 +1,22 @@
 import { useEffect, useId, useState } from "react";
-import { getMermaid } from "@/lib/mermaid";
+
+let mermaidPromise: Promise<(typeof import("mermaid"))["default"]> | undefined;
+
+function getMermaid() {
+  if (!mermaidPromise) {
+    mermaidPromise = import("mermaid").then(({ default: mermaid }) => {
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: "strict",
+        theme: "base",
+        flowchart: { curve: "basis", htmlLabels: true, useMaxWidth: true },
+      });
+      return mermaid;
+    });
+  }
+
+  return mermaidPromise;
+}
 
 interface FluxogramaMermaidProps {
   chart: string;
@@ -7,21 +24,19 @@ interface FluxogramaMermaidProps {
 }
 
 export function FluxogramaMermaid({ chart, ariaLabel }: FluxogramaMermaidProps) {
-  const reactId = useId();
+  const id = useId().replace(/:/g, "");
   const [svg, setSvg] = useState("");
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     let active = true;
-    const diagramId = `fluxograma-${reactId.replace(/[^a-zA-Z0-9_-]/g, "")}`;
-
     setSvg("");
     setHasError(false);
 
     getMermaid()
-      .then((mermaid) => mermaid.render(diagramId, chart))
-      .then(({ svg: renderedSvg }) => {
-        if (active) setSvg(renderedSvg);
+      .then((mermaid) => mermaid.render(`mermaid-${id}`, chart))
+      .then(({ svg }) => {
+        if (active) setSvg(svg);
       })
       .catch(() => {
         if (active) setHasError(true);
@@ -29,9 +44,8 @@ export function FluxogramaMermaid({ chart, ariaLabel }: FluxogramaMermaidProps) 
 
     return () => {
       active = false;
-      document.getElementById(`d${diagramId}`)?.remove();
     };
-  }, [chart, reactId]);
+  }, [chart, id]);
 
   if (hasError) {
     return (
@@ -43,10 +57,7 @@ export function FluxogramaMermaid({ chart, ariaLabel }: FluxogramaMermaidProps) 
 
   if (!svg) {
     return (
-      <div
-        className="flex min-h-40 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-sm text-slate-500"
-        role="status"
-      >
+      <div className="flex min-h-40 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-sm text-slate-500" role="status">
         Gerando fluxograma...
       </div>
     );
@@ -54,9 +65,9 @@ export function FluxogramaMermaid({ chart, ariaLabel }: FluxogramaMermaidProps) 
 
   return (
     <div
-      className="overflow-x-auto rounded-xl border border-teal-100 bg-gradient-to-br from-white to-teal-50/60 p-3 [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:min-w-[640px] [&_svg]:max-w-none sm:p-5 sm:[&_svg]:min-w-0 sm:[&_svg]:max-w-full"
       role="img"
       aria-label={ariaLabel}
+      className="overflow-x-auto rounded-xl border border-teal-100 bg-gradient-to-br from-white to-teal-50/60 p-3 [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:min-w-[640px] [&_svg]:max-w-none sm:p-5 sm:[&_svg]:min-w-0 sm:[&_svg]:max-w-full"
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
