@@ -197,14 +197,14 @@ function FaqCard({
                   ariaLabel={`Fluxograma: ${item.question}`}
                 />
               </div>
-              {item.steps && (
+              {(item.steps || item.note) && (
                 <div className="mt-4 border-t border-slate-100 pt-4">
                   <button
                     type="button"
                     onClick={() => setDetailsOpen((value) => !value)}
                     aria-expanded={detailsOpen}
                     aria-controls={detailsId}
-                    className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-teal-200 bg-teal-50 px-3.5 py-2 text-sm font-semibold text-teal-800 transition-colors hover:border-teal-300 hover:bg-teal-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+                    className="mx-auto flex min-h-11 w-full max-w-sm items-center justify-center gap-2 rounded-lg border border-teal-200 bg-teal-50 px-5 py-2.5 text-sm font-semibold text-teal-800 transition-colors hover:border-teal-300 hover:bg-teal-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
                     Detalhes
@@ -226,18 +226,20 @@ function FaqCard({
                         transition={{ duration: 0.22, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <StepList steps={item.steps} />
+                        {item.steps && <StepList steps={item.steps} />}
+                        {item.note && (
+                          <div className="mt-4 flex gap-2.5 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3">
+                            <span className="mt-0.5 shrink-0 text-xs font-bold uppercase tracking-wide text-amber-600">
+                              Atenção
+                            </span>
+                            <p className="text-xs leading-relaxed text-amber-800">
+                              {item.note}
+                            </p>
+                          </div>
+                        )}
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
-              )}
-              {item.note && (
-                <div className="mt-4 flex gap-2.5 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
-                  <span className="text-amber-600 text-xs font-bold uppercase tracking-wide shrink-0 mt-0.5">
-                    Atenção
-                  </span>
-                  <p className="text-amber-800 text-xs leading-relaxed">{item.note}</p>
                 </div>
               )}
             </div>
