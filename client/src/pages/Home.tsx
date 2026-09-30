@@ -6,7 +6,7 @@
  * Progressive disclosure: question visible, steps revealed on expand.
  */
 
-import { useState, useMemo } from "react";
+import { useId, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronDown,
@@ -128,7 +128,14 @@ function FaqCard({
   badgeClass: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const detailsId = useId();
   const flowchart = useMemo(() => stepsToMermaid(item), [item]);
+
+  const toggleCard = () => {
+    if (open) setDetailsOpen(false);
+    setOpen((value) => !value);
+  };
 
   return (
     <motion.div
@@ -139,7 +146,7 @@ function FaqCard({
       className={`bg-white rounded-xl border border-slate-200 border-l-4 ${borderColor} shadow-sm hover:shadow-md transition-shadow duration-200`}
     >
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggleCard}
         className="w-full text-left px-5 py-4 flex items-start justify-between gap-4 group"
         aria-expanded={open}
       >
@@ -190,7 +197,41 @@ function FaqCard({
                   ariaLabel={`Fluxograma: ${item.question}`}
                 />
               </div>
-              {item.steps && <StepList steps={item.steps} />}
+              {item.steps && (
+                <div className="mt-4 border-t border-slate-100 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setDetailsOpen((value) => !value)}
+                    aria-expanded={detailsOpen}
+                    aria-controls={detailsId}
+                    className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-teal-200 bg-teal-50 px-3.5 py-2 text-sm font-semibold text-teal-800 transition-colors hover:border-teal-300 hover:bg-teal-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    Detalhes
+                    <ChevronDown
+                      aria-hidden="true"
+                      className={`h-4 w-4 transition-transform duration-200 ${
+                        detailsOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {detailsOpen && (
+                      <motion.div
+                        id={detailsId}
+                        key="details"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.22, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <StepList steps={item.steps} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
               {item.note && (
                 <div className="mt-4 flex gap-2.5 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
                   <span className="text-amber-600 text-xs font-bold uppercase tracking-wide shrink-0 mt-0.5">
