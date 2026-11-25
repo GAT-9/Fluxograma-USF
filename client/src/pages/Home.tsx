@@ -136,11 +136,11 @@ function FaqCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.25 }}
-      className={`bg-white rounded-xl border border-slate-200 border-l-4 ${borderColor} shadow-sm hover:shadow-md transition-shadow duration-200`}
+      className={`min-w-0 bg-white rounded-xl border border-slate-200 border-l-4 ${borderColor} shadow-sm hover:shadow-md transition-shadow duration-200`}
     >
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full text-left px-5 py-4 flex items-start justify-between gap-4 group"
+        className="w-full text-left px-4 sm:px-5 py-4 flex items-start justify-between gap-4 group"
         aria-expanded={open}
       >
         <div className="flex-1 min-w-0">
@@ -176,7 +176,7 @@ function FaqCard({
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="px-5 pb-5 border-t border-slate-100 pt-4">
+            <div className="px-3 sm:px-5 pb-5 border-t border-slate-100 pt-4">
               <p className="text-slate-600 text-sm leading-relaxed">{item.answer}</p>
               <div className="mt-5">
                 <p
@@ -248,22 +248,22 @@ export default function Home() {
   const totalItems = faqCategories.reduce((acc, c) => acc + c.items.length, 0);
 
   return (
-    <div className="min-h-screen" style={{ background: "#FAFAF8" }}>
+    <div className="min-h-screen overflow-x-clip" style={{ background: "#FAFAF8" }}>
       {/* ── Top Navigation ── */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
         <div className="container flex items-center justify-between h-14">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-teal-700 flex items-center justify-center">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <div className="shrink-0 w-8 h-8 rounded-lg bg-teal-700 flex items-center justify-center">
               <Building2 className="w-4 h-4 text-white" />
             </div>
-            <div>
+            <div className="min-w-0">
               <span
-                className="text-slate-800 font-bold text-sm leading-none block"
+                className="text-slate-800 font-bold text-sm leading-tight block truncate"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 Portal USF Vereador Durval Samuel de Souza
               </span>
-              <span className="text-slate-400 text-xs">
+              <span className="text-slate-400 text-xs block truncate">
                 Fluxogramas Assistenciais — PET
               </span>
             </div>
@@ -372,10 +372,10 @@ export default function Home() {
                   : `${globalResults.length} resultado${globalResults.length !== 1 ? "s" : ""} para "${searchQuery}"`}
               </p>
             </div>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 items-start">
               <AnimatePresence>
                 {globalResults.map(({ category, item }) => (
-                  <div key={item.id}>
+                  <div key={item.id} className="min-w-0">
                     <p className="text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide">
                       {category.label}
                     </p>
@@ -424,7 +424,7 @@ export default function Home() {
             </motion.div>
 
             {/* FAQ cards grid */}
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 items-start">
               <AnimatePresence mode="wait">
                 {filteredItems.length > 0 ? (
                   filteredItems.map((item) => (
